@@ -96,6 +96,9 @@ async function getDataForPage_writing() {
 
   for (let i = 0; i < filens.length; i++) {
     filen = storyDir + filens[i];
+    if (filen.includes('.json')) {
+      continue;
+    }
     const content = fs.readFileSync(filen);
     stories.push({
       title: filens[i],
