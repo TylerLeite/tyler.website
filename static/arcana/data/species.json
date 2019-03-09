@@ -1,0 +1,225 @@
+{
+  "Troll": {
+    "activeAbilities": [
+      "berserk - once per day, you may double your melee damage for 12 seconds",
+      "octoceps - once per day, you may lift up to 5x your body weight for 1 minute",
+      "sprint - once per day, you may sprint at 3x your normal speed for 1 minute"
+    ],
+    "passiveAbilities": [
+      "hated - you cannot enter large cities without the police coming after you and are unwelcome in villages"
+    ],
+    "name": "Troll",
+    "description": "Trolls have ice-blue skin and four muscular arms. They are hairless, except for some tufts around the side of their head. They generally have a hunched posture."
+  },
+  "Testudine": {
+    "activeAbilities": [
+      "withdraw - you become immune to damage, but are incapable of moving or taking any other actions until you use this ability again. 2 turn cooldown"
+    ],
+    "passiveAbilities": [
+      "sturdy - +1 damage resistance against crush attacks",
+      "fortress - flanking grants no bonus against you"
+    ],
+    "name": "Testudine",
+    "description": "The Testudine have slim figures, compared to what you would probably expect. They have shells on their backs, bony plates along their limbs, clawed hands, and heads like featherless owls."
+  },
+  "Hobgoblin": {
+    "activeAbilities": [],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "simple - you cannot be charmed or confused",
+      "tribal - +1 on all damage for each other friendly hobgoblin"
+    ],
+    "name": "Hobgoblin",
+    "description": "Hobgoblins are short with gray skin and coneheads."
+  },
+  "Dwarf": {
+    "activeAbilities": [
+      "earthbend - once per day, you can manipulate rocks and dirt up to 100lbs for 30 seconds"
+    ],
+    "passiveAbilities": [
+      "beer gut - being drunk incurs no penalties to rolls",
+      "rockeater - you can live on a diet of rocks"
+    ],
+    "name": "Dwarf",
+    "description": "Dwarves have sea green skin, bony spikes protruding from their skull. They are stout and muscular. All dwarves are born with a bushy beard, which grows only bushier with age."
+  },
+  "Seedling": {
+    "activeAbilities": [
+      "network - once per day, you can swap bodies with any plant"
+    ],
+    "passiveAbilities": [
+      "rooted - you cannot become airborne or tripped",
+      "photosynthetic - rather than eat or sleep, you can stand still for 6 hours in the sunlight"
+    ],
+    "name": "Seedling",
+    "description": "Seedlings look plantlike, have several branch-like appendages that they use as graspers, and are generally 2-3 feet tall"
+  },
+  "Catfolk": {
+    "activeAbilities": [
+      "shadow-walk - you may blink between shadow, up to a total of 50ft per day"
+    ],
+    "passiveAbilities": [
+      "darkvision - can see in the dark as though it's light",
+      "nimble feet - take less fall damage, half chance to not set off trap"
+    ],
+    "name": "Catfolk",
+    "description": "Catfolk have a largely feline appearance, with flat face and two tails. They mostly have brown fur, but other colors such as orange, black, white, and yellow are not uncommon."
+  },
+  "Gorgon": {
+    "activeAbilities": [
+      "glare - once per day, you can fossilize a beast permanently or freeze a person for 6 seconds",
+      "entangle - once per day, you can control your hair snakes to bite for 1d4 poison + 1d4 random stat damage"
+    ],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "immunity - you cannot be poisoned"
+    ],
+    "name": "Gorgon",
+    "description": "Gorgons have a human-like top half, snake-like body, hair made of snakes, 5 beady eyes, no mouth, and a flat nose with exposed nostrils"
+  },
+  "Harpie": {
+    "activeAbilities": [],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "flight - you can fly at your normal speed",
+      "air attuned - you can predict the weather 1 day in advance"
+    ],
+    "name": "Harpie",
+    "description": "Harpies are humanoid, with colorful feathered wings on their arms, talons for feet, plumage around their neck, and beaked mouths."
+  },
+  "Elf": {
+    "activeAbilities": [
+      "channel spell - once per day, you can guarantee a successful cast of any valid spell you know, regardless of whether you prepared it"
+    ],
+    "passiveAbilities": [
+      "night vision - you can see in the dark, 30ft in each direction",
+      "spellshocked - +1 damage resistance against spells"
+    ],
+    "name": "Elf",
+    "description": "Elves have light pink skin, large pointy ears, whiskers, bright bioluminescent eyes, and vestigial skeletal wings. They are slightly taller on average than humans."
+  },
+  "Centaur": {
+    "activeAbilities": [
+      "ancestral knowledge - once per day, you can automatically succeed on any survival or knowledge check about the forest"
+    ],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "natural healing - when you are at half or lower of your max hp, restore 1hp / turn"
+    ],
+    "name": "Centaur",
+    "description": "Centaurs have a human torso on an ungulate body, glowing red eyes, funky antlers, and cthulu-style tentacle mouths."
+  },
+  "Mole": {
+    "activeAbilities": [],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "blind - you can't see",
+      "tremorsense - you can tell the position of grounded, moving objects while you are also on the ground",
+      "burrower - you can move underground at your swimming speed",
+      "loose skin - +1 damage reduction against stab attacks"
+    ],
+    "name": "Mole",
+    "description": "Moles are essentially human-size naked mole rats."
+  },
+  "Satyr": {
+    "activeAbilities": [
+      "shapeshift - once per day, you can alter your appearance for 1 hour. You can only change within 1 foot of height each way and 10 pounds of apparent weight each way"
+    ],
+    "passiveAbilities": [
+      "lucky - your crit range is increased by 1",
+      "smooth talker - you get a +1 on social checks involving deceit",
+      "beer gut - being drunk incurs no physical or mental penalties to rolls"
+    ],
+    "name": "Satyr",
+    "description": "Satyrs are humanoids with goat legs and furry faces. They have horns which generally range from 1 to 3 inches in length."
+  },
+  "Faerie": {
+    "activeAbilities": [
+      "fairy dust - once per day you may create a random potion from a vial of water"
+    ],
+    "passiveAbilities": [
+      "flight - you can fly at your normal speed",
+      "tiny legs - when traveling on foot, you move at half your normal speed",
+      "small figure - you have a +2 bonus when dodging ranged weapons / spells, +1 against melee. additionally, you are easily pushed around by gusts of wind"
+    ],
+    "name": "Faerie",
+    "description": "Faeries are tiny flying critters, around 12 inches tall. They have wings similar to butterflies, but pointier. Generally their bodies are black like a shadow, though they emit some purple light."
+  },
+  "Minotaur": {
+    "activeAbilities": [
+      "bull rush - 3 times per day, you can charge at a grounded enemy from 20-100 ft away for double melee damage"
+    ],
+    "passiveAbilities": [
+      "monster - you will be noticed in a large city and not welcome in most smaller towns",
+      "thick skin - +1 damage reduction against slash attacks"
+    ],
+    "name": "Minotaur",
+    "description": "Minotaurs are bulky with dark gray skin. They have three bullhorns coming from their skull, bovine faces, and cloven hooves."
+  },
+  "Gnaw": {
+    "activeAbilities": [
+      "elude - once per day, you may disappear into shadows for 6 seconds. You can move while invisible without breaking stealth"
+    ],
+    "passiveAbilities": [
+      "darkvision - you can see in the dark as though it's light",
+      "nimble feet - take less fall damage, half chance to not set off trap"
+    ],
+    "name": "Gnaw",
+    "description": "The Gnaws are humanoid with gray, perpetually-matted fur. They have large front-teeth, furless tail, clawed fingers, and beady eyes."
+  },
+  "Human": {
+    "activeAbilities": [
+      "one of us - once per day, you may read a humanoid's true opinion of anything through a question. Only ever works once per person"
+    ],
+    "passiveAbilities": [
+      "charismatic - you get a +1 bonus to social checks involving friendliness"
+    ],
+    "name": "Human",
+    "description": "Humans have tan to pale-yellow skin. They essentially look like real-world humans, but with vestigial wing stubs."
+  },
+  "Goblin": {
+    "activeAbilities": [
+      "charm person - once per day, you can cause a humanoid to be friendly for 5 mins. Only works once per humanoid per week"
+    ],
+    "passiveAbilities": [
+      "burrowing - you can travel underground at half speed",
+      "sensitive - you get a +1 bonus on perception checks involving hearing"
+    ],
+    "name": "Goblin",
+    "description": "Goblins have dirty-orange skin, large floppy ears, and scattered, thin hair around their heads. Males have snoods and females have flat noses. They are quite short."
+  },
+  "Orc": {
+    "activeAbilities": [
+      "rend mind - once per day, you can incur a hallucination on a humanoid for 30 seconds. Only works once per humanoid per week"
+    ],
+    "passiveAbilities": [
+      "hard of hearing - you get a -1 bonus on perception checks involving hearing",
+      "loud - you get a +1 bonus to social checks involving intimidation",
+      "fear sense - you can smell fear on humanoids regardless of their bluffs"
+    ],
+    "name": "Orc",
+    "description": "Orcs are blue skinned, have no protruding ears (though they do have ear holes), and flat noses. They are tall and muscular, with long, sharp claws."
+  },
+  "Draconid": {
+    "activeAbilities": [
+      "dragon breath - 1 element (chosen at creation) ray attack. Deals 1d6 damage. 1 turn cooldown"
+    ],
+    "passiveAbilities": [
+      "aptitude - you can memorize spells at sight",
+      "soar - you can glide, slowing a fall. You cannot gain height"
+    ],
+    "name": "Draconid",
+    "description": "The Draconid have bright chromatic scales (generally red, blue, or green), catfish-style whiskers, spiky faces, dragon wings, and claws that, compared to their hand size, are relatively thick."
+  },
+  "Gnome": {
+    "activeAbilities": [
+      "gelatinous form - at the cost of 1/4 of your max hp, you may squeeze through a tight space, down to about half the width of your skull"
+    ],
+    "passiveAbilities": [
+      "nimble feet - you take less fall damage and have a 50% chance to not set off trap you walk on",
+      "chemical immunity - you can't get addicted to potions"
+    ],
+    "name": "Gnome",
+    "description": "Gnomes have light-to-deep purple skin, small frames, long eyebrows, and multicolor hair. Each individual's hair is multicolor."
+  }
+}

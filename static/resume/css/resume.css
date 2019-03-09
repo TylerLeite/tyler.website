@@ -1,0 +1,93 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    background-position: top center;
+    font-size: 87.5%;
+    font-family: Arial, 'Lucida Sans Unicode';
+    line-height: 18px;
+    text-align: left;
+    width: auto !important;
+    min-width: 675px;
+    /*background: #eee;*/
+    overflow-y: scroll;
+
+}
+
+.wrapper {
+    /*background-image: url('../img/bg.png');*/
+    /*background: #eee;*/
+    margin: 0 auto;
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+}
+
+p {
+    font-family: verdana;
+    color: #333;
+}
+
+#resumeBody {
+    width: 85%;
+    margin: 0% auto;
+    padding: 0 0 1% 0;
+    /*background-color: rgba(255,255,255,0.9);*/
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+}
+
+#name {
+    margin-top: 5%;
+    text-align: center;
+    font-size: 36px;
+    display: block;
+    margin-bottom: 2%;
+}
+
+#contact {
+    text-align: center;
+}
+
+.title {
+}
+
+.body {
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #333, #333, #ccc);
+    width: 55%;
+    display: inline-block;
+}
+
+.midAlign {
+    text-align: center;
+}
+
+hr.midHR {
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    width: 75%;
+}
+
+hr.fullHR {
+    background-image: linear-gradient(to right, #222, #333, #222);
+    width: 85%;
+}
+
+#hid:after {
+    content: "tyler.leite@yandex.com | 1655-B Alma St, Palo Alto CA | (203) 767 - 8573 ";
+}

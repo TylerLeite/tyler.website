@@ -1,0 +1,23 @@
+{
+  "name": "tyler.website",
+  "version": "1.0.0",
+  "description": "official website of tyler leite (the cool one)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tyler Leite",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "2.6.1",
+    "koa": "2.7.0",
+    "koa-router": "7.4.0",
+    "lodash": "4.17.11",
+    "moment": "2.24.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.3.4",
+    "@babel/plugin-transform-async-to-generator": "7.3.4",
+    "@babel/register": "7.0.0"
+  }
+}

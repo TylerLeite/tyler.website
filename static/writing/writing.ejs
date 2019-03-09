@@ -1,0 +1,86 @@
+<!--
+This is the source code, it's not too special. If you came here wondering why I
+end my stories with a 𓏈 character, you're in luck.
+
+It's the unicode character for the Egyptian hieroglyph for a milk jug (W20 jrtjt).
+You may have noticed that the favicon for my website is also a milk jug, albeit a
+more modern one. Basically what it comes down to is that my last name, Leite, is
+Portuguese for milk.
+
+If your browser can't render a 𓏈, get a better one. Or a better computer. Or
+update your fonts. Or just deal with it. I think those are the only options.
+
+
+Banner image is edited from a photograph by Stephen W. Oachs http://www.stephenoachs.com/
+-->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta lang="en-us">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Writing</title>
+
+    <link rel="icon" type="image/png" href="/writing/graphics/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/writing/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="/writing/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/writing/css/articles.css">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      /* Usually anchors scroll you such that the top of the window lines up with
+          the top of the element you're scrolling to. I'd prefer a bit more space
+          at the top, so I have this listener
+       */
+      window.addEventListener(
+        "hashchange",
+        () => {
+          window.scrollTo(window.scrollX, window.scrollY - 100);
+        }
+      );
+    </script>
+</head>
+<body>
+  <img class="banner" src="graphics/sf_skyline.png">
+  <div class="page">
+    <div class="">
+      <p class="return"><a href="/home">&lt; Back</a></p>
+
+        <h2>Contents</h2>
+        <ul class="contents">
+          <% for (let i = 0; i < stories.length; i++) { %>
+            <li category="creative"><a href="#<%- stories[i].slugTitle %>"><%- stories[i].title %></a></li>
+          <% } %>
+        </ul>
+      </div>
+
+      <hr>
+
+      <% for (let i = 0; i < stories.length; i++) { %>
+        <div class="titleWrapper" category="creative">
+          <a class="imgLink" href="#<%- stories[i].slugTitle %>"><img class="link" src="/writing/graphics/icons/link.png"></a>
+          <p class="title" id="<%- stories[i].slugTitle %>"><%- stories[i].title %></p>
+          <a href="/writing" class="linkBack">top&nbsp;^</a>
+        </div>
+
+        <div class="article">
+          <% for (let j = 0; j < stories[i].content.length; j++) { %>
+            <p>
+              <%- stories[i].content[j] %>
+            </p>
+          <% } %>
+          <p class="storyEnd">𓏈</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

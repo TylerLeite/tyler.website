@@ -1,0 +1,72 @@
+<head>
+  <title>Fractal</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/2dlsystem/css/style.css">
+
+  <script src="/2dlsystem/js/paint.js"></script>
+</head>
+
+<body>
+  <canvas
+    id="canvas"
+    width="1404"
+    height="1000"
+  ></canvas>
+
+  <div class="wrapper row hidden">
+    <div class="rules col">
+      <span class="row">
+        <p>name:</p>
+        <input type="text" value="froot loop"/>
+      </span>
+      <span class="row">
+        <input class="from" type="text" value="X">
+        <p class="eq">=</p>
+        <input type="text" value="c[FX[-FX][+FX]]"/>
+        <p class="eq">x</p>
+      </span>
+
+      <span class="row">
+        <input class="from" type="text" value="F">
+        <p class="eq">=</p>
+        <input type="text" value="FF"/>
+        <p class="eq">x</p>
+      </span>
+
+      <button>add a rule</button>
+      <button>save preset</button>
+    </div>
+
+    <div class="controls col">
+      <span class="row">
+        <span class="col half">
+          <p>angle</p>
+          <p>size</p>
+          <p>start x (%)</p>
+          <p>start y (%)</p>
+          <p>initial color</p>
+          <p>colorStep</p>
+          <p>render speed</p>
+        </span>
+
+        <span class="col half">
+          <input type="text" value="25" />
+          <input type="text" value="5" />
+          <input type="text" value="50" />
+          <input type="text" value="50" />
+          <input type="text" value="#32aeef" />
+          <input type="text" value="0.01" />
+          <input type="text" value="0" />
+        </span>
+      </span>
+
+      <button>render</button>
+    </div>
+  </div>
+
+  <button class="toggle-hud hidden">toggle controller</button>
+
+  <script src="/2dlsystem/js/frac.js"></script>
+  <script src="/2dlsystem/js/bind.js"></script>
+</body>

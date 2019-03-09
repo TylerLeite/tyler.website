@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: 'Source Code Pro', monospace;
+
+  font-size: 18px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.toggle-hud.hidden {
+  display: block !important;
+  opacity: 0;
+}
+.toggle-hud.hidden:hover {
+  opacity: 1;
+}
+
+body {
+  background: black;
+}
+
+canvas {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.wrapper {
+  justify-content: space-between;
+}
+
+.rules {
+  flex-basis: 20%;
+  flex-shrink: 0;
+
+  padding-left: 28px;
+}
+
+.rules input {
+  margin-top: 28px;
+}
+
+.rules .from {
+  width: 56px;
+}
+
+.eq {
+  margin-top: 28px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.controls {
+  flex-basis: 33%;
+  flex-shrink: 0;
+
+  padding-right: 28px;
+}
+
+.controls .row .col.half > * {
+  margin-top: 28px;
+}
+
+button {
+  background: black;
+  color: #2bff45;
+  margin-top: 28px;
+  padding: 10px;
+  width: 200px;
+  margin: 28px auto;
+  border: 2px solid #2bff45;
+
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.col {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.half {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+p {
+  color: #2bff45;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #2bff45;
+  background: black;
+  outline: none;
+  box-shadow: none;
+}
+
+p, input {
+  color: #2bff45;
+  height: 28px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.toggle-hud {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+}

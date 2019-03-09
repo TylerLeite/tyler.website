@@ -1,0 +1,67 @@
+* {
+  image-rendering: pixelated;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background: url("../graphics/bg.jpg");
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+p {
+  width: 100%;
+  font-size: var(--font-size-text);
+  text-align: center;
+  margin-top: var(--pmargin);
+  font-family: 'Press Start 2P', sans-serif;
+  color: var(--text-color-main);
+}
+
+.icons {
+  margin-top: 0;
+  cursor: default;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.icon:hover {
+  filter: hue-rotate(180deg);
+}
+
+@media (max-width: 500px) {
+  .portrait {
+    width: auto;
+    height: 40vh;
+
+    display: block;
+
+    position: fixed;
+    bottom: 0;
+    left: calc(50% - (23vh * 512 / 493));
+  }
+}
+
+@media (min-width: 501px) {
+  .portrait {
+      width: 512px;
+      height: 493px;
+      display: block;
+      position: fixed;
+      bottom: 0;
+      /*left: calc(50% - 256px);*/
+      bottom: -50px;
+      left: 0;
+  }
+}

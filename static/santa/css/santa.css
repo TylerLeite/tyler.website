@@ -1,0 +1,36 @@
+* {
+  font-family: Montserrat;
+  margin: 0;
+}
+
+.message {
+  text-align: center;
+  margin-top: 20%;
+  margin-bottom: 3%;
+  font-size: 32px;
+}
+
+.buttons {
+  flex-flow: row nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+button {
+  font-size: 20px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 2px;
+
+  margin: 0 15px;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+p#you-get {
+    text-align: center;
+    font-size: 48px;
+    margin-top: 5%;
+}
