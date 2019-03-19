@@ -1,0 +1,84 @@
+.body {
+	background-color: #ddd;
+	font-family: 'Asap', sans-serif;
+}
+
+.separate-bg {
+	background-color: #0be699;
+}
+
+.header {
+	color: #111;
+	height: 39px;
+	width: 100%;
+	font-size: 1.2em;
+	border-style: solid;
+	border-color: #1b1;
+	border-width: 0px 0px 1px 0px;
+}
+
+.navEl a:link, .navEl a:visited {
+	color: #111;
+}
+
+.title .h3  a:link, .title .h3 a:visited {
+	color: #111;
+	text-decoration: none;
+}
+
+.content {
+	margin-bottom: 4%;
+	display: inline-block;
+}
+
+.h1 {
+	text-align: center;
+	margin-top: 3%;
+}
+
+.description {
+	width: 90%;
+	margin: 3% auto;
+	display: block;
+	text-align: justify;
+	font-size: 1.4em;
+}
+
+.tile {
+	height: 4px !important;
+	width: 4px !important;
+}
+
+.mosaic-wrapper {
+	display: block;
+	margin: 0 auto !important;
+	width: 604px;
+}
+
+#mosaic-canvas tr {
+	display: block;
+}
+
+#mosaic-canvas td {
+	float: left;
+	display: block;
+}
+
+#mosaic-canvas {
+	float: left;
+	margin-top: -2px;
+}
+
+#scratch-can {
+	display: none;
+}
+
+.sources {
+	width: 100px;
+	float: left;
+}
+
+.sources img {
+	display: block;
+	cursor: pointer;
+}
