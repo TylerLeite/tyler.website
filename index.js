@@ -63,6 +63,8 @@ async function getDataForPage (file) {
     return getDataForPage_writing();
   } else if (file == 'arcana') {
     return getDataForPage_arcana();
+  } else if (file == '5e') {
+    return getDataForPage_5e();
   } else {
     return {};
   }
@@ -84,6 +86,31 @@ async function getDataForPage_arcana() {
     speciesNames_d: speciesNames,
     statsNames_d: statsNames,
     schools_d: schools,
+  };
+}
+
+async function getDataForPage_5e() {
+  const races = require('./static/5e/data/races.json');
+  const classes = require('./static/5e/data/classes.json');
+  const backgrounds = require('./static/5e/data/backgrounds.json');
+  const feats = require('./static/5e/data/feats.json');
+  const spells = require('./static/5e/data/spells.json');
+  const mundaneItems = require('./static/5e/data/mundane-items.json'); // including weapons, armor
+  const magicItems = require('./static/5e/data/magic-items.json');
+  const characterData = require('./static/5e/data/character-data.json'); // stats, skills, languages, etc
+
+  // const monsters = require('./static/5e/data/monsters.json'); // stats, skills, etc
+
+  return {
+    races_d: races,
+    classes_d: classes,
+    backgrounds_d: backgrounds,
+    featss_d: feats,
+    spells_d: spells,
+    mundaneItems_d: mundaneItems,
+    magicItems_d: magicItems,
+    characterData_d: characterData,
+    // monsters_d: monsters,
   };
 }
 
