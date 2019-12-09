@@ -1,1 +1,0 @@
-speciesNames = Object.getOwnPropertyNames(species);
