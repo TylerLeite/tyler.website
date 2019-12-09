@@ -1,6 +1,6 @@
 function santa (seed) {
-  // let peeps = ['Tyler', 'Allie', 'Kyle', 'Ajmal', 'Mama', 'Ddogg'];
-  let peeps = ['Austin', 'Cathy', 'Chasé', 'Corn', 'Noah', 'Tyler', 'Winslorp']
+  let peeps = ['Tyler', 'Allie', 'Kyle', 'Ajmal', 'Mama', 'Ddogg', 'Stefanie'];
+  // let peeps = ['Austin', 'Cathy', 'Chasé', 'Corn', 'Noah', 'Tyler', 'Winslorp']
 
 
   function randomNumber (range) {
