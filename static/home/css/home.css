@@ -45,6 +45,8 @@ p {
     width: auto;
     height: 40vh;
 
+    z-index: -1;
+
     display: block;
 
     position: fixed;
@@ -57,11 +59,20 @@ p {
   .portrait {
       width: 512px;
       height: 493px;
+
+      z-index: -1;
+
       display: block;
       position: fixed;
       bottom: 0;
       /*left: calc(50% - 256px);*/
       bottom: -50px;
       left: 0;
+  }
+}
+
+@-moz-document url-prefix() {
+  div.page  {
+    overflow: visible;
   }
 }
