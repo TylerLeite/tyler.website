@@ -16,8 +16,7 @@
     <script type="text/javascript" src="/santa/js/santa.js"></script>
 
     <script>
-      // const results = santa(200);
-      const results = santa(12321);
+      const results = santa(1);
       function handleClick (name) {
         let text = document.getElementById('you-get');
         text.innerHTML = results[name];
@@ -44,6 +43,7 @@
       <button onclick="handleClick('Mama')">Mama</button>
       <button onclick="handleClick('Ddogg')">Ddogg</button>
       <button onclick="handleClick('Stefanie')">Stefanie</button>
+      <button onclick="handleClick('Haya')">Haya</button>
     </div>
 
     <p id="you-get">???</p>
