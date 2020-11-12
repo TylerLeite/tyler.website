@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
+
 
 button {
   font-size: 20px;
@@ -28,6 +28,24 @@ button {
   box-shadow: none !important;
   outline: none !important;
 }
+
+@media screen and (max-width: 850px) {
+  .message {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-size: 32px;
+  }
+
+  .buttons {
+    flex-flow: column nowrap;
+  }
+
+  button {
+    margin: 10px 0;
+  }
+}
+
 
 p#you-get {
     text-align: center;
