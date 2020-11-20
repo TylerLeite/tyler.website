@@ -3,6 +3,7 @@ html {
   background-color: black;
   background-image: url("../graphics/articles_bg.png");
   background-size: 150%;
+  image-rendering: -moz-crisp-edges;
   image-rendering: pixelated;
 }
 
