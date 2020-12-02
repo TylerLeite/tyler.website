@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta lang="en-us">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Tyler Leite</title>
+
+    <link rel="icon" type="image/png" href="/santa/graphics/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/santa/css/santa.css">
+
+    <script type="text/javascript" src="/santa-seestor/js/santa.js"></script>
+
+    <script>
+      const results = santa(1);
+      function handleClick (name) {
+        let text = document.getElementById('you-get');
+        text.innerHTML = results[name];
+      }
+    </script>
+  </head>
+
+  <body>
+    <p class="message">Click your button to see who you get!</p>
+    <div class="buttons">
+      <button onclick="handleClick('Allie')">Allie</button>
+      <button onclick="handleClick('Sophie')">Sophie</button>
+      <button onclick="handleClick('Issa')">Issa</button>
+      <button onclick="handleClick('Hannah')">Hannah</button>
+    </div>
+
+    <p id="you-get">???</p>
+  </body>
+</html>
