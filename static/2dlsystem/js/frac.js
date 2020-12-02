@@ -214,18 +214,18 @@ const seaweed = {
   'X': 'cF+X[cF+X[cF+X]X-X][cF-X[cF-X]]-X',
   'F': 'FF',
 };
-x = wd/2;
-y = hg/6;
-preserveColor = truba;
-colorStep = 0.07;
-render(compute('X', seaweed, 5), 13, 8, 100);
+// x = wd/2;
+// y = hg/6;
+// preserveColor = truba;
+// colorStep = 0.07;
+// render(compute('X', seaweed, 5), 13, 8, 100);
 
 const corndog = {
   'X': 'F+X-[X-X]+',
   'F': 'FF',
 };
-// x = wd/1;
-// y = hg/1;
+// x = wd/2;
+// y = hg/2;
 // render(compute('[X]++++++++++++[X]++++++++++++[X]', corndog, 6), 10, 3, truba);
 
 const corndog2 = {
@@ -279,12 +279,12 @@ const wheat = {
   'X': 'cF+[cF+X]-X[[cF+X]+cF]+X',
   'F': 'FF'
 }
-// x = wd/1.3;
-// y = hg/4;
-// colorStep = 0.007;
-// preserveColor = truba;
-// render(compute('X', wheat, 8), 60, 4, 100);
-// render(compute('X', wheat, 7), 12, 3, fluba);
+x = wd/1.3;
+y = hg/4;
+colorStep = 0.007;
+preserveColor = truba;
+render(compute('X', wheat, 8), 60, 4, 200);
+// render(compute('X', wheat, 7), 12, 3, 100);
 
 const curly2 = {
   'X': 'F[+X-F]+FF[X-X]-FX[[+XF]-XF]+X',
@@ -350,3 +350,53 @@ const wreathDouble = {
 // y = hg/2;
 // colorStep = 0.07
 // render(stochasticCompute('[Z[X][Y]][z[x][y]]', wreathDouble, 5, 0.33, ['X', 'Y', 'Z', 'x', 'y', 'z']), 4.5, 20, 100);
+
+
+const tootloop = {
+  'X': 'x[FX[+FY+FY]]',
+  'Y': 'y[FY[-FX]F[-FX]]',
+  'x': 'F+y',
+  'y': '-Fx',
+  'F': 'cFF',
+  'Q': 'FFF',
+};
+// x = wd/1;
+// y = hg/1.2;
+// colorStep = 0.001;
+// preserveColor = truba;
+// angle = 0;
+// render(compute('X+FX+FX+FX+FX+FX+Q', tootloop, 10), 30, 0.125, 1500);
+
+const bluflowa = {
+  'X': 'cF[F+X+FX]-cF[F-X]F[+cF+X]',
+  'F': 'FF',
+};
+// x = wd/1;
+// y = 0;
+// colorStep = 0.01;
+// preserveColor = truba;
+// angle = 0;
+// render(compute('++++++X', bluflowa, 11), 15, 0.125, 1500);
+
+const pastelflowa = {
+  'X': 'cF[F+X+FX]-cF[F-X]F[+cF+X]',
+  'F': 'FF',
+};
+// x = wd/1;
+// y = 0;
+// colorStep = 0.0000002;
+// preserveColor = fluba;
+// angle = 0;
+// render(compute('++++++X', pastelflowa, 11), 15, 0.125, 1500);
+
+const virtua = {
+  'X': 'cF[+XF]F+F-[-YF]+F',
+  'Y': 'cFF[-FX]+F[+XY]',
+  'F': 'FF',
+};
+// x = wd/3;
+// y = hg/1.25;
+// colorStep = 0.0001;
+// preserveColor = fluba;
+// angle = 0;
+// render(compute('X', virtua, 16), 60, 0.0125, 1500);
