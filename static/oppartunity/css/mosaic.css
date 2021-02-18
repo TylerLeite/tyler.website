@@ -15,6 +15,25 @@
 	border-style: solid;
 	border-color: #1b1;
 	border-width: 0px 0px 1px 0px;
+
+	display: flex;
+	align-items: center;
+	padding-left: 0.5vw;
+}
+
+.header a.icon-a {
+	height: 32px;
+}
+
+.header .logo {
+	float: none;
+	margin-top: 0;
+	height: 32px;
+	width: 32px;
+}
+
+nav.nav {
+	margin-top: 0;
 }
 
 .navEl a:link, .navEl a:visited {
@@ -50,9 +69,12 @@
 }
 
 .mosaic-wrapper {
-	display: block;
-	margin: 0 auto !important;
-	width: 604px;
+	display: flex;
+	justify-content: center;
+}
+
+#mosaic {
+	flex-shrink: 0;
 }
 
 #mosaic-canvas tr {
@@ -74,8 +96,7 @@
 }
 
 .sources {
-	width: 100px;
-	float: left;
+	flex-shrink: 0;
 }
 
 .sources img {

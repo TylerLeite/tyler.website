@@ -4,28 +4,28 @@
 	<meta charset="UTF-8">
 	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
-	<link rel="stylesheet" type="text/css" href="./css/mosaic.css">
+	<link rel="stylesheet" type="text/css" href="/langen/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/oppartunity/css/mosaic.css">
 
-	<link rel="icon" type="image/png" href="./img/favicon.png">
+	<link rel="icon" type="image/png" href="/home/graphics/favicon.png">
 
-	<script src="./js/mosaic/processimage.js"></script>
+	<script src="/oppartunity/js/processimage.js"></script>
 </head>
 
 <body class="body plain-bg">
 <div class="wrapper">
 	<div id="header" class="header separate-bg">
-		<a href="home"><img src="./img/logo_dark.png" width="32px" height="32px" class="logo"></a>
+		<a href="home" class="icon-a"><img src="/home/graphics/favicon.png" width="32px" height="32px" class="logo"></a>
 		<nav id="nav" class="nav noselect"><ul>
-			<li class="navEl"><a href="home">[home]</a></li>
-			<li class="navEl"><a target="_blank" href="resume">[resume]</a></li><p class="separate">:|:</p>
-			<li class="navEl"><a href="#">[mosaic]</a></li>
+			<li class="navEl"><a href="/home">[home]</a></li>
+			<li class="navEl"><a target="_blank" href="/resume">[resume]</a></li><p class="separate">:|:</p>
+			<li class="navEl"><a href="/oppartunity">[oppartunity]</a></li>
 		</ul></nav>
 	</div>
 	<div id="fake-header"></div>
 	<div class="content">
-		<p class="h1">The automatic mosaic thing</p>
-		<p class="description">This is a program that takes an image and creates a mosaic out of it. It reads in pixel data and makes an educated guess about which color that pixel is. It then uses that information to construct an HTML table where each cell is representative of a pixel. All photos are either taken by me or of me, so hopefully no one gets mad about copyright. As of right now, you can't make a mosaic from an arbitrary image's url (for <a target="_blank" href="https://www.w3.org/TR/html5/scripting-1.html#security-with-canvas-elements">security reasons</a>) or upload images (for <a target="_blank" href="https://pages.github.com/">github.io reasons</a>), so hopefully my beautiful photography is good enough for you.</p>
+		<p class="h1">Oppartunity, or, The Automatic Mosaic Thing</p>
+		<p class="description">This is a program that takes an image and creates a mosaic out of it. It reads in pixel data and makes an educated guess about which color that pixel is. It then uses that information to construct an HTML table where each cell is representative of a pixel. All photos are either taken by me or of me, so hopefully no one gets mad about copyright. As of right now, you can't make a mosaic from an arbitrary image's url (for <a target="_blank" href="https://www.w3.org/TR/html5/scripting-1.html#security-with-canvas-elements">security reasons</a>) or upload images (because I didn't feel like implementing that ¯\_(ツ)_/¯), so hopefully my beautiful photography is good enough for you.</p>
 
 		<div class="mosaic-wrapper">
 			<div id="sources-left" class="sources noselect"></div>
@@ -47,9 +47,9 @@
 			sources = document.getElementById("sources-right");
 		}
 		var image = document.createElement("img");
-		image.src = "./img/mosaic/" + images[i] + ".png";
-		image.width = 100;
-		image.height = 100;
+		image.src = "/oppartunity/img/" + images[i] + ".png";
+		image.width = 150;
+		image.height = 150;
 		sources.appendChild(image);
 		image.onclick = (function () {
 			mosaicFromURL(this.src);
@@ -78,7 +78,7 @@
 
 		img.onload = function() {
 			// Make sure all this only happens AFTER the image is loaded
-		    ctx.drawImage(img, 0,0,img.width,img.height, 0,0,100,100);
+			ctx.drawImage(img, 0,0,img.width,img.height, 0,0,100,100);
 			var datums = ctx.getImageData(0, 0, 100, 100).data;
 			var out = [];
 
@@ -97,7 +97,7 @@
 		img.src = url;
 	}
 
-	mosaicFromURL("img/mosaic/glam.png");
+	mosaicFromURL("/oppartunity/img/glam.png");
 </script>
 
 </body>
