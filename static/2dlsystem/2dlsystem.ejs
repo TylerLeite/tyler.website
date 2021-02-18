@@ -15,27 +15,29 @@
   ></canvas>
 
   <div class="wrapper row hidden">
-    <div class="rules col">
-      <!-- <span class="row">
-        <p>name:</p>
-        <input type="text" value="froot loop"/>
-      </span> -->
+    <div id="rules" class="rules col">
+      <span id="computeinputs" class="row">
+        <input id="start" type="text" value="++X"/>
+        <input id="iterations" type="text" value="10"/>
+      </span>
+
       <span class="row">
         <input class="from" type="text" value="X">
         <p class="eq">=</p>
-        <input type="text" value="c[FX[-FX][+FX]]"/>
-        <p class="eq">x</p>
+        <input type="text" value="cF[F+X+FX]-cF[F-X]F[+cF+X]"/>
+        <p class="eq" onclick="event.target.parentElement.remove();">x</p>
       </span>
 
       <span class="row">
         <input class="from" type="text" value="F">
         <p class="eq">=</p>
         <input type="text" value="FF"/>
-        <p class="eq">x</p>
+        <p class="eq" onclick="event.target.parentElement.remove();">x</p>
       </span>
 
-      <button>add a rule</button>
-      <!-- <button>save preset</button> -->
+      <div id="rule-add-anchor" style="display:none;"></div>
+
+      <button id="add-rule">add a rule</button>
     </div>
 
     <div class="controls col">
@@ -50,16 +52,16 @@
         </span>
 
         <span class="col half">
-          <input type="text" value="25" />
-          <input type="text" value="5" />
-          <input type="text" value="50" />
-          <input type="text" value="50" />
-          <input type="text" value="0.01" />
-          <input type="text" value="0" />
+          <input id="angle-in" type="text" value="25" />
+          <input id="size-in" type="text" value="0.325" />
+          <input id="x-in" type="text" value="50" />
+          <input id="y-in" type="text" value="0" />
+          <input id="colorstep-in" type="text" value="0.03" />
+          <input id="speed-in" type="text" value="1500" />
         </span>
       </span>
 
-      <button>render</button>
+      <button id="render-button">render</button>
     </div>
   </div>
 

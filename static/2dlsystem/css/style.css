@@ -45,10 +45,16 @@ canvas {
 
 .rules input {
   margin-top: 28px;
+  width: 400px;
 }
 
 .rules .from {
   width: 56px;
+}
+
+#computeinputs > input#iterations {
+  margin-left: 25px;
+  width: 80px;
 }
 
 .eq {
