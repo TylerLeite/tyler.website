@@ -9,6 +9,7 @@ const Koa = require('koa');
 const KoaRouter = require('koa-router');
 const ejs = require('ejs');
 
+const http = require('http');
 const https = require('https');
 
 var data = {};
@@ -89,5 +90,5 @@ const options = {
 };
 
 http.createServer(app.callback()).listen(80);
-https.createServer(options, app.callback()).listen(433);
-console.log('Server started on port ' + port);
+https.createServer(options, app.callback()).listen(443);
+console.log('Server started on ports 80, 443');
