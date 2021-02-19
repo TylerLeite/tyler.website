@@ -9,6 +9,8 @@ const Koa = require('koa');
 const KoaRouter = require('koa-router');
 const ejs = require('ejs');
 
+const https = require('https');
+
 var data = {};
 
 const app = new Koa();
@@ -82,5 +84,10 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 const port = 80;
-app.listen(port);
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
+};
+
+https.createServer(options, app.callback()).listen(port);
 console.log('Server started on port ' + port);
