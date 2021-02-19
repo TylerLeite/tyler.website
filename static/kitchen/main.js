@@ -1,15 +1,24 @@
 import * as THREE from '/kitchen/node_modules/three/build/three.module.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+
+const user = new THREE.Group();
+user.position.set(0, 0, 0);
+user.add(camera);
+
+scene.add(user);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 import { VRButton } from '/kitchen/node_modules/three/examples/jsm/webxr/VRButton.js';
+
 document.body.appendChild(VRButton.createButton(renderer));
 renderer.xr.enabled = true;
+user.add(renderer.xr.getController(0));
 
 import { GLTFLoader } from '/kitchen/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 const loader = new GLTFLoader();
@@ -27,15 +36,15 @@ loader.load('/kitchen/kitchen.gltf', function (gltf) {
   console.error(err);
 });
 
-const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.3); // soft white light
+const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.3);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.25);
 scene.add(directionalLight);
 
-camera.position.z = 40;
-camera.position.y = 10;
-camera.rotation.x = -.05;
+user.position.z = 40;
+user.position.y = 10;
+user.rotation.x = -.05;
 
 var cubes = [];
 var lights = [];
@@ -74,19 +83,15 @@ function animate() {
   if (!!kitchen) {
     if (!done) {
       const tc = cubes[target];
-      const dx = camera.position.x - tc.position.x;
-      const dy = camera.position.y - tc.position.y;
-      const dz = camera.position.z - tc.position.z;
+      const dx = user.position.x - tc.position.x;
+      const dy = user.position.y - tc.position.y;
+      const dz = user.position.z - tc.position.z;
 
-      camera.position.x -= dx/(60*2);
-      camera.position.y -= dy/(60*2);
-      camera.position.z -= dz/(60*2);
+      user.position.x -= dx/(60*2);
+      user.position.y -= dy/(60*2);
+      user.position.z -= dz/(60*2);
 
-      // camera.rotation.x -= (camera.rotation.x - targetRotation.x)/60;
-      // camera.rotation.y -= (camera.rotation.y - targetRotation.y)/60;
-      // camera.rotation.z -= (camera.rotation.z - targetRotation.z)/60;
       camera.lookAt(0,0,0);
-
 
       if (dx*dx+dy*dy+dz*dz < 0.05) {
         done = true;

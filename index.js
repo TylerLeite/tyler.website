@@ -84,11 +84,17 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
-};
-
 http.createServer(app.callback()).listen(80);
-https.createServer(options, app.callback()).listen(443);
-console.log('Server started on ports 80, 443');
+console.log('Server started on ports 80');
+
+try {
+  const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
+  };
+
+  https.createServer(options, app.callback()).listen(443);
+  console.log('Server started on port 443');
+} catch (error) {
+  console.error('Could not start https server');
+}
