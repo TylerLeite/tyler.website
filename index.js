@@ -31,6 +31,7 @@ router.get('*', async (ctx, next) => {
   let fileType, fileContents;
   for (let i = 0; i < urlparts.length; i++) {
     let test = './static/' + urlparts.slice(0, urlparts.length-i).join('/');
+    console.log(test)
     if (fs.existsSync(test)) {
       [fileType, fileContents] = await getFile(test, urlparts.slice(urlparts.length-1));
       break;
