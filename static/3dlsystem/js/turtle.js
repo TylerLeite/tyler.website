@@ -20,30 +20,38 @@ export class Turtle {
   constructor (
     THREE,
     instructions,
-    pitchAngle=0.977384, yawAngle=0.785398, rollAngle=0.20944,
-    lengthRatio=0.8, thicknessRatio=0.8,
-    hueIncrement=0.017,
+    sphereThicknessRatio=1.1,
+    pitchAngle=Math.PI/8, yawAngle=Math.PI/8, rollAngle=Math.PI/8,
+    lengthRatio=0.8, thicknessRatio=0.66,
+    hueIncrement=0.0017,
   ) {
     this._3 = THREE;
     this.group = new THREE.Group();
+    this.lights = new THREE.Group();
+    this.lights.visible = false;
+    this.group.add(this.lights);
+
+    this.parsed = false;
 
     this.instructions = instructions;
 
     this.state = {
       cursor: {x: 0, y: 0, z: 0},
-      rotation: {h: 1, l: 0, u: 0},
+      rotation: {h: 0, l: 1, u: 0},
       thickness: 0.2,
-      sphereThickness: 0.05,
+      sphereThickness: 0.3,
       length: 2,
     };
 
     this.lengthRatio = lengthRatio;
     this.thicknessRatio = thicknessRatio;
+    this.sphereThicknessRatio = sphereThicknessRatio;
     this.pitchAngle = pitchAngle; // branching angle
     this.yawAngle = yawAngle; // phyllotactic angle
     this.rollAngle = rollAngle;
     this.hueIncrement = hueIncrement;
-    this.hue = 0;
+    this.hue = 0.55;
+    this.trunkColor = 0x905a22;
 
     this.stateHistory = [];
   }
@@ -64,11 +72,14 @@ export class Turtle {
   }
 
   cylinderBetween (bottom, top, thickness, length) {
+    // Possible ways to optimize if performance is too low:
+    //  1. Merge all cylinders into a single mesh
+    //  2. Instanced meshes for cylinders of the same size
     const THREE = this._3;
 
     const cylinder = new THREE.Mesh(
-      new THREE.CylinderGeometry(thickness*this.thicknessRatio, thickness, length, 4),
-      new THREE.MeshLambertMaterial({color: 0x905a22}),
+      new THREE.CylinderBufferGeometry(thickness*this.thicknessRatio, thickness, length, 4),
+      new THREE.MeshLambertMaterial({color: this.trunkColor}),
     );
     cylinder.position.set(bottom.x, bottom.y, bottom.z);
 
@@ -79,9 +90,6 @@ export class Turtle {
 
     cylinder.rotation.y = -Math.atan2(z, x);
     cylinder.rotation.z = -Math.acos(y/r);
-    // cylinder.rotation.y = 0;
-    // cylinder.rotation.z = Math.PI/2;
-
 
     cylinder.position.x += x/2;
     cylinder.position.y += y/2;
@@ -101,11 +109,17 @@ export class Turtle {
     const THREE = this._3;
 
     const sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(radius, 8, 8),
+      new THREE.SphereBufferGeometry(radius, 7, 4),
       new THREE.MeshLambertMaterial({color}),
     );
     sphere.position.set(point.x, point.y, point.z);
     this.group.add(sphere);
+
+    if (Math.random() > 0.1) {
+      const pointLight = new THREE.PointLight(color, 0.75, 5);
+      pointLight.position.set(point.x, point.y, point.z);
+      this.lights.add(pointLight);
+    }
   }
 
   parseOneInstruction (i) {
@@ -133,11 +147,11 @@ export class Turtle {
           oldCursorPosition,
           this.state.cursor,
           this.state.thickness,
-          this.state.length
+          this.state.length,
         );
 
         this.state.thickness *= this.thicknessRatio;
-        this.state.sphereThickness /= this.thicknessRatio;
+        this.state.sphereThickness *= this.sphereThicknessRatio;
         this.state.length *= this.lengthRatio;
       }
     } else if (ins == '@') {
@@ -145,25 +159,25 @@ export class Turtle {
       const color = toRgb(this.hue, 1, 0.7);
       this.hue += this.hueIncrement;
       this.sphereAt(this.state.cursor, this.state.sphereThickness, color);
-    } else if (ins == '+') {
+    } else if (ins == '<') {
       // Turn left
       this.state.rotation = rotate(RU(this.yawAngle), this.state.rotation)
-    } else if (ins == '-') {
+    } else if (ins == '>') {
       // Turn right
       this.state.rotation = rotate(RU(-this.yawAngle), this.state.rotation)
     } else if (ins == '|') {
       // Turn 180
       this.state.rotation = rotate(RU(Math.PI), this.state.rotation)
-    } else if (ins == '~') {
+    } else if (ins == '^') {
       // Roll left
       this.state.rotation = rotate(RH(this.rollAngle), this.state.rotation)
-    } else if (ins == '/') {
+    } else if (ins == 'v') {
       // Roll right
       this.state.rotation = rotate(RH(-this.rollAngle), this.state.rotation)
-    } else if (ins == '^') {
+    } else if (ins == '+') {
       // Pitch up
       this.state.rotation = rotate(RL(-this.pitchAngle), this.state.rotation)
-    } else if (ins == '&') {
+    } else if (ins == '-') {
       // Pitch down
       this.state.rotation = rotate(RL(this.pitchAngle), this.state.rotation)
     } else if (ins == '[') {
@@ -172,10 +186,9 @@ export class Turtle {
     } else if (ins == ']') {
       // Pop state
       this.popState();
-    } else if (ins == '{') {
-      // Start saving positions as vertices of a polygon
-    } else if (ins == '}') {
-      // Fill saved vertices
+    } else if (ins == '.') {
+      // Decrease sphere thickness
+      this.state.sphereThickness /= this.sphereThicknessRatio;
     } else if (ins == ';') {
       // Increase color map index
     } else if (ins == ':') {
@@ -184,8 +197,12 @@ export class Turtle {
   }
 
   parseInstructions () {
+    this.parsed = true;
     for (let i = 0; i < this.instructions.length; i++) {
-      setTimeout(this.parseOneInstruction.bind(this, i), i*5)
+      setTimeout(this.parseOneInstruction.bind(this, i), i*5);
+      if (i == this.instructions.length-1) {
+        this.group.matrixAutoUpdate = false;
+      }
     }
 
     // Only want this function to ever run once
@@ -208,7 +225,7 @@ function rotate (mat, vec) {
   }
 }
 
-function toRgb (h, s, l) {
+export function toRgb (h, s, l) {
   function hueToRgb (v1, v2, hue) {
     const dv = v2 - v1;
     hue = hue%1;
@@ -246,5 +263,5 @@ function toRgb (h, s, l) {
     b = 255*hueToRgb(v1, v2, h - 1/3);
   }
 
-  return r*255*255 + g*255 + b;
+  return Math.floor(r*255*255) + Math.floor(g*255) + Math.floor(b);
 }
