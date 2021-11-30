@@ -4,7 +4,7 @@
     <meta lang="en-us">
     <meta name="viewport" content="width=device-width">
 
-    <title>Tyler Leite</title>
+    <title>Secret Santa</title>
 
     <link rel="icon" type="image/png" href="/santa/graphics/favicon.png">
 
@@ -16,34 +16,46 @@
     <script type="text/javascript" src="/santa/js/santa.js"></script>
 
     <script>
-      const results = santa(1);
+      const results = santa(8238);
       function handleClick (name) {
-        let text = document.getElementById('you-get');
-        text.innerHTML = results[name];
+        const text = document.getElementById('you-get');
+        text.innerHTML = name + ', you get: ' + results[name];
+
+        let buttons = document.getElementsByTagName('button');
+        for (let button of buttons) {
+          if (button.innerHTML == name) {
+            button.classList.remove('not-selected');
+            button.classList.add('selected');
+          } else {
+            button.classList.remove('selected');
+            button.classList.add('not-selected');
+          }
+        }
+      }
+
+      function bodyOnLoad () {
+        let buttons = document.getElementsByTagName('button');
+        for (let button of buttons) {
+          button.onclick = handleClick.bind(null, button.innerHTML);
+        }
       }
     </script>
   </head>
 
-  <body>
+  <body onload="bodyOnLoad();">
     <p class="message">Click your button to see who you get!</p>
     <div class="buttons">
-	<!--
-      <button onclick="handleClick('Austin')">Austin</button>
-      <button onclick="handleClick('Cathy')">Cathy</button>
-      <button onclick="handleClick('Chasé')">Chasé</button>
-      <button onclick="handleClick('Corn')">Corn</button>
-      <button onclick="handleClick('Noah')">Noah</button>
-      <button onclick="handleClick('Tyler')">Tyler</button>
-      <button onclick="handleClick('Winslorp')">Winslorp</button>
-	--!>
-      <button onclick="handleClick('Tyler')">Tyler</button>
-      <button onclick="handleClick('Kyle')">Kyle</button>
-      <button onclick="handleClick('Allie')">Allie</button>
-      <button onclick="handleClick('Ajmal')">Ajmal</button>
-      <button onclick="handleClick('Mama')">Mama</button>
-      <button onclick="handleClick('Ddogg')">Ddogg</button>
-      <button onclick="handleClick('Stefanie')">Stefanie</button>
-      <button onclick="handleClick('Haya')">Haya</button>
+      <div class="row1">
+        <button>Tyler</button>
+        <button>Kyle</button>
+        <button>Allie</button>
+        <button>Ajmal</button>
+      </div>
+      <div class="row2">
+        <button>Mama</button>
+        <button>Ddogg</button>
+        <button>Stefanie</button>
+      </div>
     </div>
 
     <p id="you-get">???</p>

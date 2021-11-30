@@ -5,13 +5,13 @@
 
 .message {
   text-align: center;
-  margin-top: 20%;
-  margin-bottom: 3%;
+  margin-top: 10%;
+  margin-bottom: 5%;
   font-size: 32px;
 }
 
 .buttons {
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,36 +19,36 @@
 
 
 button {
-  font-size: 20px;
+  font-size: 36px;
+
   background: white;
   border: 1px solid black;
-  border-radius: 2px;
+  border-radius: 4px;
 
-  margin: 0 15px;
+  margin: 1vw 2vw;
+  padding: 10px 20px;
+
   box-shadow: none !important;
   outline: none !important;
+
+  cursor: pointer;
 }
 
-@media screen and (max-width: 850px) {
-  .message {
-    text-align: center;
-    margin-top: 5%;
-    margin-bottom: 3%;
-    font-size: 32px;
-  }
-
-  .buttons {
-    flex-flow: column nowrap;
-  }
-
-  button {
-    margin: 10px 0;
-  }
+button:hover, button.selected {
+  color: #22aa45 !important;
 }
 
+button.not-selected {
+  background: #c9c9c9;
+  color: #888;
+}
+
+.row1, .row2 {
+  margin-bottom: 20px;
+}
 
 p#you-get {
     text-align: center;
     font-size: 48px;
-    margin-top: 5%;
+    margin-top: 30px;
 }

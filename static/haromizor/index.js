@@ -134,5 +134,4 @@ generate a chord from the notes you're using
   if not, fill in the chord with notes you're playing
   if you dont have enough, pick from the list of triggers / associates
     count sharp triggers, associates as a dissonance
-
 */

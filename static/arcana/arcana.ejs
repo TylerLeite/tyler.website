@@ -44,8 +44,8 @@
         width: 33px;
         text-align: center;
         padding-right: 5px;
-      } 
-      
+      }
+
       .statskills .field-wrap p {
         align-items: flex-end;
         margin-left: 5px;
@@ -87,7 +87,7 @@
         //httpRequest.open('POST', 'localhost:20394/')
         //httpRequest.setRequestHeader('Content-Type', 'application/json');
       }
-      
+
       function OnSpeciesChange (event) {
         const desks = document.getElementById('species-infos').children;
         for (let i = 0; i < desks.length; i++) {
@@ -95,7 +95,7 @@
             desks[i].style.display = 'flex';
           } else {
             desks[i].style.display = 'none';
-          } 
+          }
         }
       }
 
@@ -136,18 +136,18 @@
         msp -= Number(document.getElementById('First Aid').value);
         msp -= Number(document.getElementById('Knowledge').value);
         msp -= Number(document.getElementById('Engineering').value);
-        document.getElementById('sp-rem-mental').innerHTML = msp + ' mental skill points remaining'; 
+        document.getElementById('sp-rem-mental').innerHTML = msp + ' mental skill points remaining';
       }
 
       function OnSchoolChange (event) {
-        schools = event.target.value.split('/');  
+        schools = event.target.value.split('/');
         chillins = document.getElementById('school-descriptions').children;
         for (let i = 0; i < chillins.length; i++) {
           chillins[i].style.display = 'none';
 
           for (let j = 0; j < schools.length; j++) {
             if (chillins[i].id == schools[j] + '-description') {
-              chillins[i].style.display = 'flex';  
+              chillins[i].style.display = 'flex';
             }
           }
         }
@@ -173,8 +173,8 @@
         </select></span>
 
         <span class="flex-col" id="school-descriptions">
-          <% for (let key in schools_d) { %>
-            <p id="<%- key %>-description" style="display:none"><%- schools_d[key] %></p>
+          <% for (let key in schools) { %>
+            <p id="<%- key %>-description" style="display:none"><%- schools[key] %></p>
           <% } %>
         </span>
       </span>
@@ -184,30 +184,30 @@
           <label for="species">Species:</label>
           <select name="species" id="species" onchange="OnSpeciesChange(event);">
             <option value="" selected>Choose Carefully</option>
-            <% for (let i = 0; i < speciesNames_d.length; i++) { %>
-              <option value="<%- speciesNames_d[i] %>"><%- speciesNames_d[i] %></option>
+            <% for (let i = 0; i < speciesNames.length; i++) { %>
+              <option value="<%- speciesNames[i] %>"><%- speciesNames[i] %></option>
             <% } %>
           </select>
         </span>
 
         <div id="species-infos">
-        <% for (let i = 0; i < speciesNames_d.length; i++) { %>
-          <div id="<%- speciesNames_d[i] + '-info' %>" class="flex-col" style="display:none;">
-            <p id="species-description"><%- species_d[speciesNames_d[i]].description %></p>
-            <% if (species_d[speciesNames_d[i]].passiveAbilities.length > 0) { %>
+        <% for (let i = 0; i < speciesNames.length; i++) { %>
+          <div id="<%- speciesNames[i] + '-info' %>" class="flex-col" style="display:none;">
+            <p id="species-description"><%- species[speciesNames[i]].description %></p>
+            <% if (species[speciesNames[i]].passiveAbilities.length > 0) { %>
               <p>Passive Abilities</p>
               <ul id="species-passives">
-                <% for (let j = 0; j < species_d[speciesNames_d[i]].passiveAbilities.length; j++) { %>
-                  <li><%- species_d[speciesNames_d[i]].passiveAbilities[j] %></li>  
+                <% for (let j = 0; j < species[speciesNames[i]].passiveAbilities.length; j++) { %>
+                  <li><%- species[speciesNames[i]].passiveAbilities[j] %></li>
                 <% } %>
               </ul>
             <% } %>
 
-            <% if (species_d[speciesNames_d[i]].activeAbilities.length > 0) { %>
+            <% if (species[speciesNames[i]].activeAbilities.length > 0) { %>
               <p>Active Abilities</p>
               <ul id="species-actives">
-                <% for (let j = 0; j < species_d[speciesNames_d[i]].activeAbilities.length; j++) { %>
-                  <li><%- species_d[speciesNames_d[i]].activeAbilities[j] %></li>  
+                <% for (let j = 0; j < species[speciesNames[i]].activeAbilities.length; j++) { %>
+                  <li><%- species[speciesNames[i]].activeAbilities[j] %></li>
                 <% } %>
               </ul>
             <% } %>
@@ -218,33 +218,33 @@
 
       <div id="stats" class=" statskills flex-col">
       <p id="stat-points-remaining">10 stat points remaining</p>
-      <% for (let i = 0; i < statsNames_d.stats.length; i++) { %>
+      <% for (let i = 0; i < statsNames.stats.length; i++) { %>
         <span class="field-wrap">
-          <label class="stat-name" for="<%- statsNames_d.stats[i] %>"><%- statsNames_d.stats[i] %></label>
-          <input type="text" name="<%- statsNames_d.stats[i] %>" id="<%-statsNames_d.stats[i] %>" value="10" onkeyup="OnStatChange(event, '<%- statsNames_d.stats[i] %>')"/>
-          <p id="spb-<%- statsNames_d.stats[i] %>">(+2 skill points)</p>
+          <label class="stat-name" for="<%- statsNames.stats[i] %>"><%- statsNames.stats[i] %></label>
+          <input type="text" name="<%- statsNames.stats[i] %>" id="<%-statsNames.stats[i] %>" value="10" onkeyup="OnStatChange(event, '<%- statsNames.stats[i] %>')"/>
+          <p id="spb-<%- statsNames.stats[i] %>">(+2 skill points)</p>
         </span>
-        <p class="stats-description"><%- stats_d.stats[statsNames_d.stats[i]].description %></p>
+        <p class="stats-description"><%- stats.stats[statsNames.stats[i]].description %></p>
       <% } %>
       </div>
 
       <div id="skills" class="flex-row">
         <div id="skills-mental" class="statskills flex-col">
         <p id="sp-rem-mental">4 mental skill points remaining</p>
-        <% for (let key in stats_d.skills) { if (stats_d.skills[key].type == 'mental') { %>
+        <% for (let key in stats.skills) { if (stats.skills[key].type == 'mental') { %>
           <span class="field-wrap">
             <input onkeyup="_updateSkillPoints()" type="text" name="<%- key %>" id="<%- key %>" value="0"/>
-            <label for="<%- key %>" title="<%- stats_d.skills[key].description %>"><p class="skill-name"><%- key %></p>(?)</label>
+            <label for="<%- key %>" title="<%- stats.skills[key].description %>"><p class="skill-name"><%- key %></p>(?)</label>
           </span>
         <% }} %>
         </div>
 
         <div id="skills-physical" class="statskills flex-col">
         <p id="sp-rem-physical">4 physical skill points remaining</p>
-        <% for (let key in stats_d.skills) { if (stats_d.skills[key].type == 'physical') { %>
+        <% for (let key in stats.skills) { if (stats.skills[key].type == 'physical') { %>
           <span class="field-wrap">
             <input onkeyup="_updateSkillPoints()" type="text" name="<%- key %>" id="<%- key %>" value="0"/>
-            <label for="<%- key %>" title="<%- stats_d.skills[key].description %>"><p class="skill-name"><%- key %></p>(?)</label>
+            <label for="<%- key %>" title="<%- stats.skills[key].description %>"><p class="skill-name"><%- key %></p>(?)</label>
           </span>
         <% }} %>
         </div>

@@ -15,11 +15,8 @@
   ></canvas>
 
   <div class="wrapper row hidden">
-    <div class="rules col">
-      <!-- <span class="row">
-        <p>name:</p>
-        <input type="text" value="froot loop"/>
-      </span> -->
+
+    <div id="rules" class="rules col">
       <span class="row">
         <input class="from" type="text" value="X">
         <p class="eq">=</p>
@@ -50,16 +47,16 @@
         </span>
 
         <span class="col half">
-          <input type="text" value="25" />
-          <input type="text" value="5" />
-          <input type="text" value="50" />
-          <input type="text" value="50" />
-          <input type="text" value="0.01" />
-          <input type="text" value="0" />
+          <input id="angle" type="text" value="25" />
+          <input id="size" type="text" value="5" />
+          <input id="startx" type="text" value="50" />
+          <input id="starty" type="text" value="50" />
+          <input id="colorstep" type="text" value="0.01" />
+          <input id="renderspeed" type="text" value="0" />
         </span>
       </span>
 
-      <button>render</button>
+      <button id="render-button">render</button>
     </div>
   </div>
 
