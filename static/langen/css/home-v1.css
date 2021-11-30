@@ -17,7 +17,7 @@
 
 #fake-header {
 	display: block;
-	height: 10%;
+	/* height: 10%; */
 	width: 100%;
 }
 
@@ -61,9 +61,15 @@
 	text-align: justify;
 }
 
+.website-text {
+	height: calc(100vh - 50vh - 79.25px - 15.03px);
+	margin-bottom: 39px;
+}
+
 #random-text {
 	font-size: 70%;
 	width: 80%;
+	padding-bottom: 5vh;
 }
 
 .content .button {

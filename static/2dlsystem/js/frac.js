@@ -139,7 +139,6 @@ function renderStep (sym, dtheta, len) {
 
     ctx.lineTo(x, hg*2-y);
 
-
     ctx.strokeStyle = toRgb(color, 1, 0.7);
     ctx.moveTo(x, hg*2-y);
   } else if (sym == '+') {
@@ -168,18 +167,39 @@ function renderStep (sym, dtheta, len) {
   }
 }
 
-function renderSteps (syms, dtheta, len, stepped) {
+function renderSteps (syms, dtheta, len, stepped, renderId) {
   ctx.beginPath();
   for (let i = 0; i < syms.length; i++) {
+    if (renderId != currentRenderId) {
+      break;
+    }
     renderStep(syms[i], dtheta, len, stepped);
   }
+  ctx.closePath();
   ctx.stroke();
 }
 
-function render (str, dtheta=25, len=10, stepped=fluba) {
-  // console.log(str);
+// This was designed pretty badly and I don't feel like refactoring it so here
+//   is a tried-and-true hacky workaround
+function updateVars (_x, _y, _colorStep, _preserveColor, _angle) {
+  x = _x;
+  y = _y;
+  colorStep = _colorStep;
+  preserveColor = _preserveColor;
+  angle = _angle;
+}
+
+var currentRenderId = 'abc123';
+
+function cancel () {
+  currentRenderId = Math.random().toString(26);
+  ctx.clearRect(0, 0, wd*2, hg*2);
+}
+
+function render (str, dtheta=25, len=10, stepped=fluba, renderId='abc123') {
   ctx.beginPath();
   ctx.moveTo(x, hg*2-y);
+  ctx.closePath();
   ctx.stroke();
 
   if (!stepped) {
@@ -187,12 +207,16 @@ function render (str, dtheta=25, len=10, stepped=fluba) {
   }
 
   for (let i = 0; i < str.length; i += stepped) {
+    if (renderId != currentRenderId) {
+      return;
+    }
+
     if (i + stepped > str.length) {
       stepped = str.length - i;
     }
 
     setTimeout(
-      renderSteps.bind(null, str.slice(i, i + stepped), dtheta, len, stepped),
+      renderSteps.bind(null, str.slice(i, i + stepped), dtheta, len, stepped, renderId),
       Math.floor(i/stepped)
     );
   }
@@ -279,11 +303,11 @@ const wheat = {
   'X': 'cF+[cF+X]-X[[cF+X]+cF]+X',
   'F': 'FF'
 }
-x = wd/1.3;
-y = hg/4;
-colorStep = 0.007;
-preserveColor = truba;
-render(compute('X', wheat, 8), 60, 4, 200);
+// x = wd/1.3;
+// y = hg/4;
+// colorStep = 0.007;
+// preserveColor = truba;
+// render(compute('X', wheat, 8), 60, 4, 200);
 // render(compute('X', wheat, 7), 12, 3, 100);
 
 const curly2 = {

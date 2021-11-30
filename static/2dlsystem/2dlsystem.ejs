@@ -15,24 +15,29 @@
   ></canvas>
 
   <div class="wrapper row hidden">
-
     <div id="rules" class="rules col">
+      <span id="computeinputs" class="row">
+        <input id="start" type="text" value="++X"/>
+        <input id="iterations" type="text" value="10"/>
+      </span>
+
       <span class="row">
         <input class="from" type="text" value="X">
         <p class="eq">=</p>
-        <input type="text" value="c[FX[-FX][+FX]]"/>
-        <p class="eq">x</p>
+        <input type="text" value="cF[F+X+FX]-cF[F-X]F[+cF+X]"/>
+        <p class="eq" onclick="event.target.parentElement.remove();">x</p>
       </span>
 
       <span class="row">
         <input class="from" type="text" value="F">
         <p class="eq">=</p>
         <input type="text" value="FF"/>
-        <p class="eq">x</p>
+        <p class="eq" onclick="event.target.parentElement.remove();">x</p>
       </span>
 
-      <button>add a rule</button>
-      <!-- <button>save preset</button> -->
+      <div id="rule-add-anchor" style="display:none;"></div>
+
+      <button id="add-rule">add a rule</button>
     </div>
 
     <div class="controls col">

@@ -9,6 +9,11 @@ const Koa = require('koa');
 const KoaRouter = require('koa-router');
 const ejs = require('ejs');
 
+const http = require('http');
+const https = require('https');
+
+var data = {};
+
 const app = new Koa();
 const router = new KoaRouter();
 
@@ -27,8 +32,10 @@ router.get('*', async (ctx, next) => {
   }
 
   let fileType, fileContents, pageData;
+  console.log(urlparts);
   for (let i = 0; i < urlparts.length; i++) {
     let test = './static/' + urlparts.slice(0, urlparts.length-i).join('/');
+    console.log(test);
     if (fs.existsSync(test)) {
       [fileType, fileContents] = await getFile(test, urlparts.slice(urlparts.length-1));
       break;
@@ -62,6 +69,20 @@ async function getFile (file, params) {
   return [extension, data];
 }
 
+async function getDataForPage (file) {
+  file = file.split('/').pop().split('.')[0];
+
+  if (!data[file]) {
+    try {
+      data[file] = require('./static/' + file + '/' + file + '.js').getData;
+    } catch (e) {
+      data[file] = () => {return {}};
+    }
+  }
+
+  return data[file]();
+}
+
 app.use(async (ctx, next) => {
   await next();
   console.log(`${new Date()} ${ctx.method} ${ctx.url}`)
@@ -70,6 +91,17 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-const port = 80;
-app.listen(port);
-console.log('Server started on port ' + port);
+http.createServer(app.callback()).listen(80);
+console.log('Server started on ports 80');
+
+try {
+  const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
+  };
+
+  https.createServer(options, app.callback()).listen(443);
+  console.log('Server started on port 443');
+} catch (error) {
+  console.error('Could not start https server');
+}
