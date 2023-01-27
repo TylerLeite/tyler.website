@@ -16,6 +16,13 @@ function RU (a) { return [
   [0, 0, 1],
 ]};
 
+const aMinorPentatonicScale = [
+  'A2', 'C3', 'D3', 'E3', 'G3',
+  'A3', 'C4', 'D4', 'E4', 'G4',
+  'A4', 'C5', 'D5', 'E5', 'G5',
+];
+
+// Confusingly, a Turtle object represents a tree
 export class Turtle {
   constructor (
     THREE,
@@ -159,6 +166,10 @@ export class Turtle {
       const color = toRgb(this.hue, 1, 0.7);
       this.hue += this.hueIncrement;
       this.sphereAt(this.state.cursor, this.state.sphereThickness, color);
+      // TODO: Save notes, replay them on loop, scale volume with inverse distance
+      if (typeof this.synth !== 'undefined') {
+        this.synth.triggerAttackRelease(aMinorPentatonicScale[Math.floor(Math.random()*15)], "8n", Tone.now());
+      }
     } else if (ins == '<') {
       // Turn left
       this.state.rotation = rotate(RU(this.yawAngle), this.state.rotation)
@@ -194,15 +205,20 @@ export class Turtle {
     } else if (ins == ':') {
       // Decrease color map index
     }
+
+    if (i >= this.instructions.length-1) {
+      this.group.matrixAutoUpdate = false;
+      return null;
+    }
+
+    // return this.parseOneInstruction.bind(this, i+1);
   }
 
   parseInstructions () {
     this.parsed = true;
     for (let i = 0; i < this.instructions.length; i++) {
-      setTimeout(this.parseOneInstruction.bind(this, i), i*5);
-      if (i == this.instructions.length-1) {
-        this.group.matrixAutoUpdate = false;
-      }
+      // TODO: run this on a clock rather than everything async
+      setTimeout(this.parseOneInstruction.bind(this, i), i*100);
     }
 
     // Only want this function to ever run once

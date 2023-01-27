@@ -91,8 +91,15 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-http.createServer(app.callback()).listen(80);
-console.log('Server started on ports 80');
+httpPort = process.env.HTTP_PORT || 80;
+httpsPort = process.env.HTTPS_PORT || 443;
+try {
+  http.createServer(app.callback()).listen(httpPort);
+  console.log('Server started on port', httpPort);
+} catch (error) {
+  console.error('Cannot start server on', httpPort);
+}
+
 
 try {
   const options = {

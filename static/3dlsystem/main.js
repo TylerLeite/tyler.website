@@ -1,4 +1,19 @@
 import * as THREE from '/3dlsystem/node_modules/three/build/three.module.js';
+import * as tone from '/3dlsystem/node_modules/tone/build/Tone.js';
+
+// const timerFns = [];
+// function runTimerFns () {
+//   for (let i = timerFns.length-1; i >= 0; i--) {
+//     if (timerFns[i] !== null) {
+//       timerFns.push(timerFns[i].call());
+//     }
+//     timerFns.splice(i, 1);
+//   }
+//
+//   setTimeout(runTimerFns, 100);
+// }
+//
+// setTimeout(runTimerFns, 0);
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 50);
@@ -20,8 +35,13 @@ user.add(camera);
 scene.add(user);
 user.add(renderer.xr.getController(0));
 
+var audioInitiated = false
+
 var _controllerState = {}
 document.body.addEventListener('keydown', (evt) => {
+  if (!audioInitiated) {
+    audioInitiated = true;
+  }
   _controllerState[evt.key] = true;
 });
 
@@ -108,7 +128,7 @@ for (let i = 0; i < num_trees; i++) {
 }
 
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
@@ -153,16 +173,30 @@ function animate() {
 
     const r2 = (tx-x)*(tx-x) + (tz-z)*(tz-z);
 
+    // If the tree is in view
     if (frustum.containsPoint(new THREE.Vector3(tx, 0, tz))) {
-      if (r2 < 625 && !trees[i].parsed) {
-        window.setTimeout(trees[i].parseInstructions.bind(trees[i]), 0);
+      if (r2 < 625) {
+        if (typeof trees[i].synth === 'undefined') {
+          if (Math.random() > 0.5) {
+            trees[i].synth = new Tone.FMSynth().toDestination();
+          } else {
+            trees[i].synth = new Tone.AMSynth().toDestination();
+          }
+        }
+
+        if (!trees[i].parsed) {
+          // Only parse trees when they are close enough to the camera
+          // timerFns.push(trees[i].parseOneInstruction.bind(trees[i], 0));
+          trees[i].parseInstructions();
+        }
       }
 
-      if (r2 < 100) {
+      const lightDistance = 100
+      if (r2 < lightDistance) {
         // TODO: figure out how to do lights more efficiently so this doesnt lag
-        // trees[i].lights.visible = true;
+        trees[i].lights.visible = true;
         for (let j = 0; j < trees[i].lights.children.length; j++) {
-          trees[i].lights.children[j].intensity = (100-r2)/100;
+          trees[i].lights.children[j].intensity = (lightDistance-r2)/lightDistance;
         }
       }
     }
@@ -183,3 +217,13 @@ function animate() {
   renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
+
+// sound more quiet if further away
+// tone higher if sphere is higher in tree
+// pre-parse tree -> play song on repeat
+// tree cylinders + fruits grow fluidly instead of popping into existence
+// add flowers, grass, clouds, infinite generation
+// add hills
+// add birds, squirrels, bunnies, spiders (all with their own behavior + music)
+// add rivers (drum beats)
+// day / night cycle? instruments change over time
