@@ -9,11 +9,11 @@
   "author": "Tyler Leite",
   "license": "MIT",
   "dependencies": {
-    "ejs": "2.6.1",
+    "ejs": "^3.1.9",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
-    "lodash": "4.17.11",
-    "moment": "2.24.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "three": "^0.125.2"
   },
   "devDependencies": {

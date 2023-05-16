@@ -41,35 +41,22 @@ p {
   filter: hue-rotate(180deg);
 }
 
-@media (max-width: 500px) {
-  .portrait {
+.portrait {
     width: auto;
-    height: 40vh;
+    height: 70vh;
+    max-height: 70vw;
 
     z-index: -1;
 
     display: block;
-
     position: fixed;
     bottom: 0;
-    left: calc(50% - (23vh * 512 / 493));
-  }
+    right: 0;
 }
 
-@media (min-width: 501px) {
-  .portrait {
-      width: 512px;
-      height: 493px;
-
-      z-index: -1;
-
-      display: block;
-      position: fixed;
-      bottom: 0;
-      /*left: calc(50% - 256px);*/
-      bottom: -50px;
-      left: 0;
-  }
+#tycho {
+  z-index: 1;
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {
