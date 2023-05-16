@@ -103,8 +103,8 @@ try {
 
 try {
   const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/psychoca.de/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/psychoca.de/fullchain.pem'),
   };
 
   https.createServer(options, app.callback()).listen(443);
