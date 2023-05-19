@@ -1,0 +1,4 @@
+ejs ui
+
+improve mixobot algorithm
+-potentially tag ingredients manually? incorporate domain knowledge. probably don't have a large enough data set to learn otherwise

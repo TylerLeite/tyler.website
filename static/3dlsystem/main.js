@@ -217,13 +217,3 @@ function animate() {
   renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
-
-// sound more quiet if further away
-// tone higher if sphere is higher in tree
-// pre-parse tree -> play song on repeat
-// tree cylinders + fruits grow fluidly instead of popping into existence
-// add flowers, grass, clouds, infinite generation
-// add hills
-// add birds, squirrels, bunnies, spiders (all with their own behavior + music)
-// add rivers (drum beats)
-// day / night cycle? instruments change over time

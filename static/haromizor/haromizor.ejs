@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Harmonizer</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+    <!-- <script type="module" src="/haromizor/js/playback.js"></script> -->
+
+    <script type="module">
+        import { harmonizerStart } from "/haromizor/js/playback.js"
+        function onClickGo () {
+            harmonizerStart();
+        }
+
+        document.body.onload = () => {
+            document.getElementById("go-button").onclick = onClickGo;
+        }
+    </script>
+</head>
+
+<body>
+    <button id="go-button">Go</button>
+</body>
+
+</html>

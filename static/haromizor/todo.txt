@@ -1,0 +1,13 @@
+need a way to deal with at 1 / 8 / 10
+need to pick note lengths
+-breaks as passing tones?
+
+want to evolve chord structure naturally + self-similarly
+-> l system useful? could use a GA to fit an l-system-defined structure to the melody, use function line matches as fitness
+-> keep track of tension value over time? as it rises, more dissonance is allowed (or even encouraged), as it drops, try to stay consonant
+-> also excitement / emphasis: faster note speed / higher density of chord strikes
+
+ui
+accompany in real time
+-listen through mic?
+-set tension, excitement, emphasis based on what it hears

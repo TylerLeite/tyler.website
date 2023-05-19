@@ -120,4 +120,5 @@ try {
   console.log('Server started on port 443');
 } catch (error) {
   console.error('Could not start https server');
+  console.error(error);
 }
