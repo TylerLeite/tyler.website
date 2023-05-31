@@ -1,0 +1,2 @@
+see if names can be compressed enough to keep all info in the url
+-else store minified urls in a db pointing to encoded names

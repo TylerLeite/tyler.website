@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Harmonizer</title>
+
+    <link rel="stylesheet" type="text/css" href="/harmonizer/css/style.css">
+
+    <script type="module">
+        import { harmonizerStart } from "/harmonizer/js/playback.js"
+        import MidiPlayer from '/harmonizer/node_modules/midi-player-js/build/index.browser.js';
+        import { Soundfont } from '/harmonizer/node_modules/smplr/dist/index.mjs';
+
+        const context = new AudioContext();
+        const chordInstrument = new Soundfont(context, { instrument: "vibraphone" });
+        const melodyInstrument = new Soundfont(context, { instrument: "vibraphone" });
+
+        window.currentChordColor = [128, 128, 128]
+        window.currentChordSize = 12
+
+        window.currentMelodyColor = [128, 128, 128]
+        window.currentMelodySize = 16
+
+        function nextChordSize() {
+            window.currentChordSize += Math.floor(Math.random()*3)-1
+            return window.currentChordSize
+        }
+
+        function nextChordColor() {
+            const i = Math.floor(Math.random()*3);
+            window.currentChordColor[i] += Math.floor(Math.random()*32)-16;
+            window.currentChordColor[i] = Math.abs(window.currentChordColor[i]) % 256;
+            return window.currentChordColor.join(',');
+        }
+
+        function nextMelodySize() {
+            window.currentMelodySize += Math.floor(Math.random()*3)-1;
+            return window.currentMelodySize;
+        }
+
+        function nextMelodyColor() {
+            const i = Math.floor(Math.random()*3);
+            window.currentMelodyColor[i] += Math.floor(Math.random()*32)-16;
+            window.currentMelodyColor[i] = Math.abs(window.currentMelodyColor[i]) % 256;
+            return window.currentMelodyColor.join(',');
+        }
+        
+        function onClickGo () {
+            document.getElementById('go-button').remove();
+            const midiFiles = harmonizerStart();
+
+            const MelodyPlayer = new MidiPlayer.Player(function (event) {
+                // console.log(event);
+                if (event.name === "Note on") {
+                    melodyInstrument.start({ note: event.noteName, velocity: 80 });
+
+                    const notes = document.getElementById('melody-notes');
+                    const thisMelodyNote = document.createElement('p');
+                    thisMelodyNote.className = 'melody'
+                    thisMelodyNote.style.fontSize = `${nextMelodySize()}px`;
+                    thisMelodyNote.style.color = `rgb(${nextMelodyColor()})`;
+                    thisMelodyNote.innerText += ` ${event.noteName}`;
+                    notes.appendChild(thisMelodyNote);
+                }
+            });
+
+            window.thisChordNotes = document.createElement('p');
+            window.thisChordNotes.className = 'chord'
+            window.thisChordNotes.style.fontSize = `${nextChordSize()}px`;
+            window.thisChordNotes.style.color = `rgb(${nextChordColor()})`;
+            document.getElementById('chord-notes').appendChild(window.thisChordNotes);
+
+            const ChordPlayer = new MidiPlayer.Player(function (event) {
+                // console.log(event);
+                if (event.name === "Note on") {
+                    chordInstrument.start({ note: event.noteName, velocity: 80 });
+                    const tick = document.getElementById('chord-tick');
+                    const chordNotes = document.getElementById('chord-notes');
+                    const melodyNotes = document.getElementById('melody-notes');
+                    if (Number(tick.innerText) < event.tick) {
+                        tick.innerText = event.tick;
+                        window.thisChordNotes = document.createElement('p');
+                        window.thisChordNotes.className = 'chord'
+                        window.thisChordNotes.style.fontSize = `${nextChordSize()}px`;
+                        window.thisChordNotes.style.color = `rgb(${nextChordColor()})`;
+                        chordNotes.appendChild(thisChordNotes);
+
+                        if (document.getElementById("melody-notes").getBoundingClientRect().height > window.innerHeight*0.9) {
+                            document.getElementById("melody-notes").style.top = Number(document.getElementById("melody-notes").style.top)-1
+                        }
+
+                        if (document.getElementById("chord-notes").getBoundingClientRect().height > window.innerHeight*0.9) {
+                            document.getElementById("chord-notes").style.top = Number(document.getElementById("melody-notes").style.top)-1
+                        }
+                    }
+
+                    window.thisChordNotes.innerText += ` ${event.noteName}`;
+                }
+            });
+
+            MelodyPlayer.setTempo(1);
+            ChordPlayer.setTempo(1);
+
+            MelodyPlayer.loadDataUri(midiFiles.melodyMidi);
+            ChordPlayer.loadDataUri(midiFiles.chordMidi);
+
+            MelodyPlayer.play();
+            ChordPlayer.play();
+        }
+
+        document.body.onload = () => {
+            document.getElementById("go-button").onclick = onClickGo;
+        }
+    </script>
+</head>
+
+<body>
+    <button id="go-button">Go</button>
+    <p id="chord-tick"></p>
+    <div id="melody-notes"></div>
+    <div id="chord-notes"></div>
+</body>
+
+</html>

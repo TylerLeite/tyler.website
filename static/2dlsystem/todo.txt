@@ -1,0 +1,8 @@
+resize window -> resize canvas
+proper positioning on mobile
+size scales with window size (rather than absolute)
+dropdown built-in presets
+save + load presets in localstorage
+
+better data structure for computing + storing instructions
+-> store computed instructions in cache

@@ -29,47 +29,44 @@ p {
 .icons {
   margin-top: 0;
   cursor: default;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  max-width: 50vw;
+  margin: 0 auto;
+}
+
+.icons a {
+  margin: 1vw;
 }
 
 .icon {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
 }
 
 .icon:hover {
   filter: hue-rotate(180deg);
 }
 
-@media (max-width: 500px) {
-  .portrait {
-    width: auto;
-    height: 40vh;
+.portrait {
+  width: auto;
+  height: 70vh;
+  max-height: 70vw;
 
-    z-index: -1;
+  z-index: -1;
 
-    display: block;
-
-    position: fixed;
-    bottom: 0;
-    left: calc(50% - (23vh * 512 / 493));
-  }
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 
-@media (min-width: 501px) {
-  .portrait {
-      width: 512px;
-      height: 493px;
-
-      z-index: -1;
-
-      display: block;
-      position: fixed;
-      bottom: 0;
-      /*left: calc(50% - 256px);*/
-      bottom: -50px;
-      left: 0;
-  }
+#tycho {
+  z-index: 1;
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {

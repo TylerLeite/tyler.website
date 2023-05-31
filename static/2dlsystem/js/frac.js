@@ -406,7 +406,7 @@ const pastelflowa = {
   'X': 'cF[F+X+FX]-cF[F-X]F[+cF+X]',
   'F': 'FF',
 };
-// x = wd/1;
+// x = wd;
 // y = 0;
 // colorStep = 0.0000002;
 // preserveColor = fluba;

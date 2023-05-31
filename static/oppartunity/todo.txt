@@ -1,0 +1,5 @@
+fix css
+upload images from https://www.kaggle.com/datasets/prasunroy/natural-images
+-> have pixels point to image they are made from
+
+upload images?

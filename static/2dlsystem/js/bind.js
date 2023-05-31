@@ -54,13 +54,15 @@ document.getElementById('render-button').onclick = (event) => {
   const angle = Number(document.getElementById('angle-in').value);
 
   const size = Number(document.getElementById('size-in').value);
-  let renderSpeed = Number(document.getElementById('speed-in').value);
+  let renderSpeed = Number(document.getElementById('renderspeed-in').value);
   if (renderSpeed == 0 || isNaN(renderSpeed)) {
     renderSpeed = false;
   }
 
   updateVars(_x, _y, colorStep, preserveColor, angle);
-  render(compute(start, rules, its), angle, size, renderSpeed, currentRenderId.slice());
+  const computed = compute(start, rules, its);
+  // console.log(computed)
+  render(computed, angle, size, renderSpeed, currentRenderId.slice());
 }
 
 document.getElementById('render-button').onclick()

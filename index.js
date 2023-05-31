@@ -7,6 +7,8 @@ const _ = require('lodash');
 
 const Koa = require('koa');
 const KoaRouter = require('koa-router');
+const forceHTTPS = require('koa-force-https');
+
 const ejs = require('ejs');
 
 const http = require('http');
@@ -15,6 +17,13 @@ const https = require('https');
 var data = {};
 
 const app = new Koa();
+if (!process.env.DEV) {
+  console.log("Forcing https")
+  app.use(forceHTTPS());
+} else {
+  console.log("Dev environment, not forcing https")
+}
+
 const router = new KoaRouter();
 
 router.get('*', async (ctx, next) => {
@@ -103,12 +112,13 @@ try {
 
 try {
   const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/cooltyler.fun/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/psychoca.de/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/psychoca.de/fullchain.pem'),
   };
 
   https.createServer(options, app.callback()).listen(443);
   console.log('Server started on port 443');
 } catch (error) {
   console.error('Could not start https server');
+  console.error(error);
 }
