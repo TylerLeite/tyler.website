@@ -80,10 +80,10 @@ export default function getMelodyBuckets (rawMelody) {
   const originalKey = rawMelody[0];
   const melody = shiftMelody(rawMelody);
 
-  const functionOrder = ['tonic', 'subdominant', 'dominant', 'tonic'];
+  const functionOrder = ['tonic', 'subdominant', 'dominant'];
 
   let melodyBuckets = [];
-  let chords = [functions.tonic.triggers.slice().concat(functions.tonic[7])];
+  let chords = [functions.tonic.triggers.slice(0, 1).concat(functions.tonic[7])];
   let currentMelodyBucket = [];
 
   // TODO: push whole chord definition into chords rather than just triggers, then use those instead of functions[fn]
@@ -96,14 +96,17 @@ export default function getMelodyBuckets (rawMelody) {
     // next chord function
     const nf = functionOrder[(melodyBuckets.length+1) % functionOrder.length];
 
-    if (functions[fn].triggers.indexOf(note) !== -1) {
+    // Don't want arbitrarily long melody sequences because it causes weird desyncs
+    // TODO: fix the desyncs
+    const randomChanceToStayOnChord = currentMelodyBucket.length < 6 && (currentMelodyBucket.length < Math.random()*4);
+    if (functions[fn].triggers.indexOf(note) !== -1 || randomChanceToStayOnChord) {
       // this note is a trigger or associate of the current chord, so we stay on it
       currentMelodyBucket.push(note);
-    // } else if (functions[nf].triggers.indexOf(note) !== -1) {
-    //   // trigger the chord change
-    //   melodyBuckets.push(currentMelodyBucket.slice());
-    //   currentMelodyBucket = [note];
-    //   chords.push(functions[nf].triggers.slice());
+    } else if (functions[nf].triggers.indexOf(note) !== -1 || currentMelodyBucket.length >= 6) {
+      // trigger the chord change
+      melodyBuckets.push(currentMelodyBucket.slice());
+      currentMelodyBucket = [note];
+      chords.push(functions[nf].triggers.slice());
     } else if (functions[fn].breaks.indexOf(note) !== -1) {
       // need to break but next chord isn't triggered yet, gotta improvise
 
@@ -111,7 +114,7 @@ export default function getMelodyBuckets (rawMelody) {
       if (functions[nf].associates.indexOf(note) !== -1) {
         melodyBuckets.push(currentMelodyBucket.slice());
         currentMelodyBucket = [note];
-        chords.push(functions[nf].triggers.slice().concat(functions[nf][7]));
+        chords.push(functions[nf].triggers.slice(0, 1).concat(functions[nf][7]));
       } else {
         // we will be dissonant with both the current chord and the next chord, so we have a few options
         // option 1. substitute the strong-function chord with a medium / weak one
@@ -128,7 +131,7 @@ export default function getMelodyBuckets (rawMelody) {
           let i = Math.floor(Math.random()*subsThatWork.length)
           melodyBuckets.push(currentMelodyBucket.slice());
           currentMelodyBucket = [note];
-          chords.push(subsThatWork[i].triggers.slice().concat(subsThatWork[i][7]));
+          chords.push(subsThatWork[i].triggers.slice(0, 1).concat(subsThatWork[i][7]));
         } else {
           // TODO: option 2. change to a key for which the current chord has dominant function
 
@@ -137,7 +140,7 @@ export default function getMelodyBuckets (rawMelody) {
           // option 4. just deal with some dissonance
           melodyBuckets.push(currentMelodyBucket.slice());
           currentMelodyBucket = [note];
-          chords.push(functions[nf].triggers.slice().concat(functions[nf][7]));
+          chords.push(functions[nf].triggers.slice(0, 1).concat(functions[nf][7]));
         }
       }
     }
