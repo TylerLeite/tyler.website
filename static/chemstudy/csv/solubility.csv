@@ -1,0 +1,20 @@
+Name*,Formula*,Solubility?,Strict Exceptions?,Slightly Soluble?
+alkali salts,"Li⁺-, Na⁺-, K⁺-, Rb⁺-, Cs⁺-",soluble,-PO₄³⁻,-F⁻
+ammonium salts,-NH₄⁻,soluble,none,none
+nitrates,-NO₃⁻,soluble,none,none
+acetates,-CH₃COO⁻,soluble,none,Al³⁺-
+chlorates,-ClO₃⁻,soluble,none,none
+perchlorates,-ClO₄⁻,soluble,none,none
+chlorides,-Cl⁻,soluble,"Ag⁺-, Pb²⁺-, Hg₂²⁺-",none
+bromides,-Br⁻,soluble,"Ag⁺-, Pb²⁺-, Hg₂²⁺-",none
+iodides,-I⁻,soluble,"Ag⁺-, Pb²⁺-, Hg₂²⁺-",none
+sulfates,-SO₄²⁻,soluble,"Ba²⁺-, Ca²⁺-, Sr²⁺-, Ag⁺-, Pb²⁺-, Hg₂²⁺-",none
+nitrites,-NO₂⁻,soluble,Ag⁺-,none
+silver salts,Ag⁺-,insoluble,"-NO₃⁻, -CH₃COO⁻",none
+hydroxides,-OH⁻,insoluble,"Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-","Ca²⁺-, Sr²⁺-, Ba²⁺-"
+sulfides,-S²⁻,insoluble,"Li⁺-, Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-, Sr²⁺-",none
+oxides,-O²⁻,insoluble,"Li⁺-, Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-",none
+carbonates,-CO₃²⁻,insoluble,"Li⁺-, Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-",none
+chromates,-CrO₄²⁻,insoluble,"Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-, Ca²⁺-, Mg⁺-",none
+fluorides,-F⁻,insoluble,"Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-,  Ag⁺, Sn²⁺, Sr²⁺, Zn²⁺","Li⁺-, Ba²⁺-, Fe²⁺-, Fe³⁺-, Al³⁺-"
+phospates,-PO₄³⁻,insoluble,"Na⁺-, K⁺-, Rb⁺-, Cs⁺-, NH₄⁺-",none

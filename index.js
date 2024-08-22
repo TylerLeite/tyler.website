@@ -27,7 +27,7 @@ if (!process.env.DEV) {
 const router = new KoaRouter();
 
 router.get('*', async (ctx, next) => {
-  let url = ctx.request.url;
+  let url = ctx.request.url.split('?')[0];
 
   const urlparts = _.filter(url.split('/'), el => !!el);
 
@@ -40,13 +40,11 @@ router.get('*', async (ctx, next) => {
     urlparts.push(urlparts[urlparts.length-1] + '.ejs');
   }
 
-  let fileType, fileContents, pageData;
-  console.log(urlparts);
+  let fileType, fileContents;
   for (let i = 0; i < urlparts.length; i++) {
     let test = './static/' + urlparts.slice(0, urlparts.length-i).join('/');
-    console.log(test);
     if (fs.existsSync(test)) {
-      [fileType, fileContents] = await getFile(test, urlparts.slice(urlparts.length-1));
+      [fileType, fileContents] = await getFile(test, ctx.query);
       break;
     }
   }
@@ -68,7 +66,7 @@ async function getFile (file, params) {
     let context = {};
     jsFile = fileParts.join('.') + '.js';
     if (fs.existsSync(jsFile)) {
-      context = await require(jsFile).getDataForPage();
+      context = await require(jsFile).getDataForPage(params);
     }
 
     extension = 'html';

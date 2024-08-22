@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Chemistry study tools</title>
+    <style>
+      * { font-family: 'Courier New', Courier, monospace; }
+
+      body {
+        background-color: #333;
+        color: #4efc03;
+        margin: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+                  user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+      }
+
+      .sheet-picker {
+        margin-top: 5vh;
+        border: 1px solid #4efc03;
+        border-radius: 2px;
+        background-color: #333;
+        color: #4efc03;
+        padding: 3px 5px;
+      }
+
+      .table {display: flex; flex-flow: column nowrap; margin-top: 5vh;}
+      .table:not(:nth-child(3)) {display: none; }
+      .table .head, .table .body {display: flex; flex-flow: row nowrap}
+
+      .table .cell {
+        width: 250px;
+        border: 1px solid #4efc03;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .table .cell.hidden {color: #333; cursor: pointer;}
+      .table .cell.hidden:hover {color: #4efc03;}
+      .table .head .cell { padding: 0 6px; }
+      .table .body .cell { height: 150px; padding: 3px 6px; }
+
+      .img-holder {
+        width: 150px;
+        height: 150px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .img-holder .reveal, .img-holder .loading {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .img-holder .reveal {background-color: #333;}
+      .img-holder .loading {z-index: -1; position: absolute;}
+      .img-holder .img {display: none;}
+
+      .refresh {
+        margin-top: 5vh;
+        font-size: 32px;
+        border: 1px solid #4efc03;
+        border-radius: 5px;
+        padding: 15px;
+        cursor: pointer;
+      }
+
+      .refresh:hover {background-color: #444;}
+    </style>
+  </head>
+  <body>
+    <script>var currentRow = 0;</script>
+    <select class="sheet-picker">
+      <% for (let s=0; s < sheets.length; s++) { %>
+        <% if (sheets[s] == selected) { %>
+            <option value="<%= sheets[s] %>" selected><%= sheets[s] %></option>
+          <% } else { %>
+            <option value="<%= sheets[s] %>" onclick="location.search='?sheet=<%= sheets[s] %>'"><%= sheets[s] %></option>
+          <% } %>
+      <% } %>
+    </select>
+
+    <% for (let r=0; r < rows.length; r++) { %>
+      <div id="row-<%= r %>" class="table">
+        <div class="head">
+        <% for (let i=0; i < rows[r].headers.length; i++) { %>
+            <span class="cell"><%- rows[r].headers[i].value %></span>
+          <% } %>
+        </div>
+        <div class="body">
+          <% for (let i=0; i < rows[r].data.length; i++) { %>
+            <% if (rows[r].headers[i].type == "img") { %>
+              <div class="img-holder cell">
+                <span class="reveal" id="reveal-<%= r %>-<%= rows[r].data[i] %>" onclick="
+                  document.getElementById('reveal-<%= r %>-<%= rows[r].data[i] %>').style.display='none';
+                  imgEl = document.getElementById('img-<%= r %>-<%= rows[r].data[i] %>');
+                  imgEl.src = imgEl.getAttribute('data-src');
+                  imgEl.style.display='block'
+                ">Click to reveal structure</span>
+                <span class="loading">loading...</span>
+                <img class="img" id="img-<%= r %>-<%= rows[r].data[i] %>" data-src="<%= rows[r].data[i] %>" />
+              </div>
+            <% } else if (rows[r].headers[i].type == "hidden") { %>
+                <span class="cell hidden" onclick="
+                  this.style.color='#4efc03';
+                  this.style.cursor='initial';
+                "><%- rows[r].data[i] %></span>
+            <% } else { %>
+                <span class="cell"><%- rows[r].data[i] %></span>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="refresh noselect" onclick="
+      if (!document.getElementById(`row-${currentRow+1}`)) {
+        location.reload();
+      } else {
+        document.getElementById(`row-${currentRow}`).style.display='none';
+        currentRow++;
+        document.getElementById(`row-${currentRow}`).style.display='flex';
+      }
+      ">Next</div>
+  </body>
+</html>

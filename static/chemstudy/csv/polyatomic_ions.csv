@@ -1,0 +1,31 @@
+Name*,Formula*,Charge?,Structure&
+ammonium,NH₄,1+,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ammonium/PNG
+nitrite,NO₂,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/nitrite/PNG
+nitrate,NO₃,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/nitrate/PNG
+sulfite,SO₃,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sulfite/PNG
+sulfate,SO₄,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sulfate/PNG
+hydrogen sulfate,HSO₄,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen sulfate/PNG
+hydroxide,OH,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydroxide/PNG
+cyanide,CN,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cyanide/PNG
+phosphate,PO₄,3-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/phosphate/PNG
+hydrogen phosphate,HPO₄,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen phosphate/PNG
+dihydrogen phosphate,H₂PO₄,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/dihydrogen phosphate/PNG
+thiocyanate,NCS,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/thiocyanate/PNG
+carbonate,CO₃,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/carbonate/PNG
+hydrogen carbonate,HCO₃,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hydrogen carbonate/PNG
+hypochlorite,ClO,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/hypochlorite/PNG
+chlorite,ClO₂,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/chlorite/PNG
+chlorate,ClO₃,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/chlorate/PNG
+perchlorate,ClO₄,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/perchlorate/PNG
+acetate,CH₃COO,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/acetate/PNG
+permanganate,MnO₄,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/permanganate/PNG
+dichromate,Cr₂O₇,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/dichromate/PNG
+chromate,CrO₄,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/chromate/PNG
+peroxide,O₂,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/peroxide/PNG
+oxalate,C₂O₄,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxalate/PNG
+thiosulfate,S₂O₃,2-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/thiosulfate/PNG
+phosphite,PO₃,3-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/phosphite/PNG
+bromate,BrO₃,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/bromate/PNG
+iodate,IO₃,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/iodate/PNG
+cyanate,OCN,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cyanate/PNG
+thiocyanate,SCN,1-,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/thiocyanate/PNG

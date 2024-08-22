@@ -1,0 +1,19 @@
+Name*,Formula*,Acid / Base,Structure&
+acetic acid,CH₃COOH,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/acetic acid/PNG
+formic acid,HCOOH,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/formic acid/PNG
+benzoic acid,C₆H₅COOH,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzoic acid/PNG
+citric acid,C₆H₈O₇,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/citric acid/PNG
+aniline,C₆H₅NH₂,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aniline/PNG
+methylamine,CH₃NH₂,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/methylamine/PNG
+ethylamine,CH₃CH₂NH₂,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ethylamine/PNG
+pyridine,C₅H₅N,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/pyridine/PNG
+lactic acid,C₃H₆O₃,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/lactic acid/PNG
+butyric acid,CH₃CH₂CH₂CO₂H,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/butyric acid/PNG
+oxalic acid,H₂C₂O₄,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxalic acid/PNG
+uric acid,C₅H₄N₄O₃,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/uric acid/PNG
+malic acid,HO₂CCH(OH)CH₂CO₂H,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/malic acid/PNG
+tartaric acid,HO₂CCH(OH)CH(OH)CO₂H,acid,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/tartaric acid/PNG
+imidazole,C₃N₂H₄,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/imidazole/PNG
+benzimidazole,C₇H₆N₂,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzimidazole/PNG
+histidine,C₆H₉N₃O₂,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/histidine/PNG
+guanidine,CH₅N₃,base,https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/guanidine/PNG
