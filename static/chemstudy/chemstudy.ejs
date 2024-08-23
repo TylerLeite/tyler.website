@@ -1,10 +1,22 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+    >
 
     <title>Chemistry study tools</title>
     <style>
-      * { font-family: 'Courier New', Courier, monospace; }
+      * { 
+        font-family: 'Noto Serif', serif;
+        font-weight: 400;
+        letter-spacing: 1px;
+      }
 
       body {
         background-color: #333;
@@ -46,6 +58,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
       }
 
       .table .cell.hidden {color: #333; cursor: pointer;}
@@ -87,6 +100,15 @@
       }
 
       .refresh:hover {background-color: #444;}
+
+      @media (max-width: 600px) {
+        .sheet-picker, .table, .refresh { margin-top: 1vh; }
+        .refresh {font-size: 16px; padding: 5px; width: 290px; text-align: center; }
+        .table { flex-flow: row nowrap; }
+        .table .cell { width: 150px; height: 150px; padding: 0 !important; }
+        .table .head, .table .body {flex-flow: column nowrap}
+      }
+
     </style>
   </head>
   <body>
