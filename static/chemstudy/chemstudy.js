@@ -8,7 +8,7 @@ const sheets = [
 ];
 
 async function readCSV (name) {
-    const filen = `http://localhost/chemstudy/csv/${name}.csv`;
+    const filen = `https://psychoca.de/chemstudy/csv/${name}.csv`;
     try {
         const res = await fetch(filen);
         if (!res.ok) { 

@@ -113,12 +113,12 @@
   </head>
   <body>
     <script>var currentRow = 0;</script>
-    <select class="sheet-picker">
+    <select id="sel" class="sheet-picker" onchange="location.search=document.getElementById('sel').value;">
       <% for (let s=0; s < sheets.length; s++) { %>
         <% if (sheets[s] == selected) { %>
             <option value="<%= sheets[s] %>" selected><%= sheets[s] %></option>
           <% } else { %>
-            <option value="<%= sheets[s] %>" onclick="location.search='?sheet=<%= sheets[s] %>'"><%= sheets[s] %></option>
+            <option value="<%= sheets[s] %>"><%= sheets[s] %></option>
           <% } %>
       <% } %>
     </select>
