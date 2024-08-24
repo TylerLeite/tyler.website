@@ -113,7 +113,7 @@
   </head>
   <body>
     <script>var currentRow = 0;</script>
-    <select id="sel" class="sheet-picker" onchange="location.search=`sheet=${document.getElementById('sel').value;}`">
+    <select id="sel" class="sheet-picker" onchange="location.search=`sheet=${document.getElementById('sel').value}`">
       <% for (let s=0; s < sheets.length; s++) { %>
         <% if (sheets[s] == selected) { %>
             <option value="<%= sheets[s] %>" selected><%= sheets[s] %></option>
