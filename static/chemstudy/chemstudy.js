@@ -5,6 +5,7 @@ const sheets = [
     "solubility",
     "acids_bases",
     "organic_acids_bases",
+    "elements",
 ];
 
 async function readCSV (name) {
