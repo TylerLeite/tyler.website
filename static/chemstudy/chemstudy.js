@@ -3,6 +3,7 @@ const csvparse = require('csv-parse/sync');
 const sheets = [
     "polyatomic_ions",
     "solubility",
+    "solubility_quiz",
     "acids_bases",
     "organic_acids_bases",
     "elements",
