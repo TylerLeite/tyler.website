@@ -90,6 +90,8 @@
       .img-holder .loading {z-index: -1; position: absolute;}
       .img-holder .img {display: none;}
 
+      .img-holder .img.fingerspelling { height: 150px; width: auto; }
+
       .refresh {
         margin-top: 5vh;
         font-size: 32px;
@@ -141,7 +143,11 @@
                   imgEl.style.display='block'
                 ">Click to reveal structure</span>
                 <span class="loading">loading...</span>
-                <img class="img" id="img-<%= r %>-<%= rows[r].data[i] %>" data-src="<%= rows[r].data[i] %>" />
+                <img
+                  class="img <%= selected%>" 
+                  id="img-<%= r %>-<%= rows[r].data[i] %>" 
+                  data-src="<%= rows[r].data[i] %>" 
+                />
               </div>
             <% } else if (rows[r].headers[i].type == "hidden") { %>
                 <span class="cell hidden" onclick="
