@@ -1,0 +1,358 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link rel="icon" type="image/png" href="/home/graphics/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
+
+    <title>You don't need to guess</title>
+    <style>
+        * {
+            font-family: 'Noto Sans Mono', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        body {
+            background-color: #333;
+            color: #4efc03;
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .row {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .column {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .center {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mode-picker {
+            display: none;
+            
+            margin-top: 2.5vh;
+            border: 1px solid #4efc03;
+            border-radius: 2px;
+            background-color: #333;
+            color: #4efc03;
+            padding: 3px 5px;
+        }
+
+        #guesses {
+            margin: 2.5vw 0;
+        }
+
+        #guesses .guess {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0 8px;
+        }
+
+        #guesses .guess.blank {
+            color: #333;
+            border-bottom: 1px solid #4efc03;
+        }
+
+        #guesses .guess.x {
+            color: #ee1111;
+            border-bottom: 1px solid #e11;
+        }
+
+        #content .revealed {
+            min-height: 10px;
+        }
+
+        #content .line {
+            margin-bottom: 5px;
+            justify-content: center;
+        }
+
+        #content .tile {
+            border: 1px solid #333;
+        }
+
+        #content .tile.highlighted, #content .tile:hover:not(.ptile) {
+            border: 1px solid #999;
+        }
+
+        #content .letter {
+            font-size: 16px;
+            border-bottom: 1px solid #4efc03;
+            margin: 0px 4px;
+            padding: 0px 3px;
+        }
+
+        #content .letter.hidden {
+            color: #333;
+        }
+
+        #content .code-number {
+            font-size: 13px;
+            color: green;
+        }
+
+        #content .punctuation {
+            width: 20px;
+            text-align: center;
+        }
+
+        .game {
+            width: 90vw;
+            padding: 0 5vw;
+        }
+        
+
+        .tracker {
+            display: none;
+
+            width: 10vw;
+        }
+
+        #content {
+            width: 90vw;
+            /* width: 70vw; */
+        }
+
+        #tracker .row {
+            padding-bottom: 2px;
+        }
+
+        #tracker .index {
+            margin-right: 10px;
+            width: 35px;
+            text-align: right;
+            padding-top: 1px;
+        }
+
+        #tracker .char {
+            border-bottom: 1px solid #4efc03;
+            padding: 0 3px;
+        }
+
+        #tracker .char.hidden {
+            color: #333;
+        }
+
+        .new-game {
+            display: none;
+
+            margin-top: 2.5vh;
+            font-size: 16px;
+            border: 1px solid #4efc03;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        .new-game:hover {
+            background-color: #444;
+        }
+
+        @media (max-width: 600px) {
+
+            .mode-picker,
+            .new-game {
+                margin-top: 1vh;
+            }
+
+            .new-game {
+                font-size: 16px;
+                padding: 5px;
+                width: 290px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body 
+    onload="document.querySelector('#content .row.line .column .hidden').parentElement.className += ' highlighted'"
+    class="noselect"
+>
+    <script>
+        window.addEventListener('keydown', (event) => {
+            const letter = event.key.toUpperCase();
+            if (letter.match(/[A-Z]/gm).length != 1) {
+                return;
+            }
+            // todo: check if gameover
+            const highlightedTile = document.querySelector('.highlighted');
+            const highlightedLetter = highlightedTile.children[0];
+            const encodedAs = parseInt(highlightedTile.children[1].innerText);
+
+            if (highlightedLetter.classList.contains('hidden')) {
+                if (letter == highlightedLetter.innerText) {
+                    highlightedLetter.classList.toggle('hidden', false);
+                    highlightedLetter.classList.toggle('revealed', false);
+
+                    const allOfThisLetter = Array.from(document.querySelectorAll(`#content .encoded-as-${encodedAs}`));
+                    let revealedAll = true;
+                    for (const l of allOfThisLetter) {
+                        if (l.classList.contains('hidden')) {
+                            revealedAll = false;
+                            break;
+                        }
+                    }
+                    console.log(revealedAll);
+                    if (revealedAll) {
+                        allOfThisLetter.map(e => e.nextElementSibling.innerText = ' ');
+                    }
+                } else {
+                    // Don't want to allow you to guess a revealed letter
+                    const allRevealed = document.querySelectorAll('#tracker .char.revealed');
+                    for (const r of allRevealed) {
+                        if (r.innerHTML == letter) {
+                            return;
+                        }
+                    }
+                    let nextGuess = document.querySelector('.guess.blank');
+                    if (nextGuess !== null) {
+                        nextGuess.classList.toggle('blank', false);
+                        nextGuess.classList.toggle('x', true);
+                    }
+
+                    didYouLose = document.querySelector('.guess.blank');
+                    if (didYouLose == null) {
+                        alert('u lose sry');
+                    }
+
+                    return; // don't move cursor
+                }
+            }
+
+            // move cursor to the next letter
+            let nextTile = highlightedTile.nextElementSibling;
+
+            while (nextTile === null || nextTile.classList.contains('ptile')) {
+                if (nextTile === null) {
+                    nextLine = highlightedTile.parentElement.nextElementSibling;
+                    if (nextLine === null) {
+                        // Loop back to the beginning
+                        toHighlight = document.querySelector('#content .row.line .column .hidden');
+                        if (toHighlight === null) {
+                            // Game over!
+                            alert('looks like u win');
+                            return;
+                        } else {
+                            nextTile = toHighlight;
+                        }
+                    } else {
+                        nextTile = nextLine.children[0];
+                    }
+                } else {
+                    nextTile = nextTile.nextElementSibling;
+                }
+            }
+            nextTile.click();
+        });
+    </script>
+    <select 
+        id="sel" 
+        class="mode-picker"
+        onchange="location.search=`mode=${document.getElementById('sel').value}`"
+    >
+        <% for (let s=0; s < modes.length; s++) { %>
+            <% if (modes[s]==selected) { %>
+                <option value="<%= modes[s] %>" selected>
+                    <%= modes[s] %>
+                </option>
+            <% } else { %>
+                <option value="<%= modes[s] %>">
+                    <%= modes[s] %>
+                </option>
+            <% } %>
+        <% } %>
+    </select>
+
+    <div class="game column">
+        <div id="guesses" class="row center">
+            <div class="guess blank">X</div>
+            <div class="guess blank">X</div>
+            <div class="guess blank">X</div>
+        </div>
+
+        <div class="row">
+            <div class="tracker"></div>
+            <div id="content">
+                <% for (let l=0; l < text.length; l++) { %>
+                    <div class="row line">
+                        <% for (let c=0; c < text[l].length; c++) { %>
+                            <% if (text[l][c].match(/[A-Z]/)) { %>
+                                <span 
+                                    class="column tile" 
+                                    onclick="
+                                        document.querySelector('.highlighted').classList.toggle('highlighted', false);
+                                        this.classList.toggle('highlighted', true)
+                                    "
+                                >
+                                    <% if (encodedText[l][c] != -1) { %>
+                                        <div
+                                            class="letter encoded-as-<%= encodedText[l][c] %> hidden"
+                                        >
+                                            <%= text[l][c] %>
+                                        </div>
+                                        <div class="code-number center"><%= encodedText[l][c] %></div>
+                                    <% } else { %>
+                                        <div class="letter revealed"><%= text[l][c] %></div>
+                                        <div class="code-number center"></div>
+                                    <% } %>
+                                </span>
+                            <% } else { %>
+                                <span class="tile ptile">
+                                    <div class="punctuation"><%= text[l][c] %></div>
+                                </span>
+                            <% } %>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+
+            <div id="tracker" class="tracker">
+                <% for (let c=0; c < encodingArr.length; c++) { %>
+                    <span class="row">
+                        <p class="index"><%= c %>:</p>
+                        <% if (revealed.indexOf(encodingArr[c]) != -1) { %>
+                            <p class="char encoded-as-<%= c %> revealed"><%= encodingArr[c] %></p>
+                        <% } else { %>
+                            <p class="char encoded-as-<%= c %> hidden"><%= encodingArr[c] %></p>
+                        <% } %>
+                    </span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="new-game" onclick="">New Game</div>
+</body>
+
+</html>
