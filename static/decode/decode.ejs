@@ -31,6 +31,15 @@
             width: 100vw;
         }
 
+        #ad-break {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+            justify-content: flex-start;
+        }
+
         .row {
             display: flex;
             flex-flow: row nowrap;
@@ -244,6 +253,12 @@
             }
         }
 
+        function runAd () {
+            document.getElementById('ad-break').display.style = 'flex';
+            const r = Math.floor(Math.random()*75)+1;
+            document.getElementById('ad').src = `https://psychoca.de/decode/ads/${r}.jpg`
+        }
+
         window.addEventListener('keydown', (event) => {
             if (event.repeat) { return }
             const letter = event.key.toUpperCase();
@@ -339,6 +354,16 @@
             checkVictory();
         });
     </script>
+
+    <div 
+        id="ad-break" 
+        onclick="this.style.display='none'"
+        class="column center"
+    >
+        <p>Advertisement, click to skip in 5... 4... 3... 2... 1... ok you can exit out now</p>
+       <img id="ad-img" />
+    </div>
+
     <select 
         id="sel" 
         class="mode-picker"
