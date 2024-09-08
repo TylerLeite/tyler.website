@@ -409,6 +409,8 @@ async function getDataForPage(params) {
     }
 
     let coded = null;
+
+    let threshold = 0.2;
     while (coded === null) {
         let content = "";
         if (csvName == "poetry") {
@@ -423,7 +425,8 @@ async function getDataForPage(params) {
         }
 
         if (csvName == "poetry") {
-            coded = await main(content, 0.2);
+            coded = await main(content, threshold);
+            threshold += 0.01;
         } else {
             coded = await main(content, 2); // no limit
         }
