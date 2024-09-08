@@ -128,10 +128,13 @@
         }
 
         #content .line {
-            margin-bottom: 20px;
             justify-content: center;
 
             flex-wrap: wrap;
+        }
+
+        #content .word {
+            margin-bottom: 20px;
         }
 
         #content .tile {
@@ -270,6 +273,9 @@
 
         window.addEventListener('keydown', (event) => {
             if (event.repeat) { return }
+
+            document.getElementById('hidden-input').value = '';
+
             const letter = event.key.toUpperCase();
             if (letter.match(/[A-Z]/gm).length != 1) {
                 checkVictory();
