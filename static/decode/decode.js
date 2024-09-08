@@ -366,11 +366,11 @@ async function main(text, cutoff) {
     let minRevealed = Infinity;
     let minCoded = {};
 
+    const allWordsTxt = await getDict();
+    const dict = processDict(allWordsTxt);
+
     for (let i = 0; i < 10; i++) {
         const coded = encrypt(text);
-    
-        const allWordsTxt = await getDict();
-        const dict = processDict(allWordsTxt);
     
         let revealed = [];
         runRevealProcedure(revealed, [], coded.text, dict);
