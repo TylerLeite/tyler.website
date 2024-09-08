@@ -200,6 +200,10 @@
             background-color: #444;
         }
 
+        #hidden-input {
+            display: none;
+        }
+
         @media (max-width: 600px) {
 
             .mode-picker,
@@ -230,6 +234,11 @@
                 document.getElementById('victory').style.display = 'flex';
             }
         }
+
+        window.addEventListener('mousedown', (event) => {
+            document.getElementById('hidden-input').focus();
+        });
+
         window.addEventListener('keydown', (event) => {
             if (event.repeat) { return }
             const letter = event.key.toUpperCase();
@@ -410,6 +419,8 @@
     </div>
 
     <div class="new-game" onclick="">New Game</div>
+
+    <input type="text" id="hidden-input">
 </body>
 
 </html>
