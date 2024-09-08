@@ -235,10 +235,6 @@
             }
         }
 
-        window.addEventListener('mousedown', (event) => {
-            document.getElementById('hidden-input').focus();
-        });
-
         window.addEventListener('keydown', (event) => {
             if (event.repeat) { return }
             const letter = event.key.toUpperCase();
@@ -376,7 +372,8 @@
                                             class="column tile" 
                                             onclick="
                                                 document.querySelector('.highlighted').classList.toggle('highlighted', false);
-                                                this.classList.toggle('highlighted', true)
+                                                this.classList.toggle('highlighted', true);
+                                                document.getElementById('hidden-input').focus();
                                             "
                                         >
                                             <% if (encodedText[l][w][c] != -1) { %>
