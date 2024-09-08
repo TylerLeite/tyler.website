@@ -35,9 +35,15 @@
             position: fixed;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
             z-index: 2;
             justify-content: flex-start;
+            display: none;
+        }
+
+        #ad-break p {
+            width: 500px;
+            margin: 5vh 0;
         }
 
         .row {
@@ -240,6 +246,7 @@
         }
         randomPercent = Math.floor(randomPercent*100)/100;
         alert(`Only ${randomPercent}% of the players solved this level at the first try!`);
+        refreshAd();
     "
     class="noselect"
 >
@@ -253,10 +260,12 @@
             }
         }
 
-        function runAd () {
-            document.getElementById('ad-break').display.style = 'flex';
+        function refreshAd () {
             const r = Math.floor(Math.random()*75)+1;
-            document.getElementById('ad').src = `https://psychoca.de/decode/ads/${r}.jpg`
+            document.getElementById('ad-img').src = `https://psychoca.de/decode/ads/${r}.jpg`
+        }
+        function runAd () {
+            document.getElementById('ad-break').style.display = 'flex';
         }
 
         window.addEventListener('keydown', (event) => {
@@ -286,6 +295,10 @@
                     }
                     if (revealedAll) {
                         allOfThisLetter.map(e => e.nextElementSibling.innerText = ' ');
+                    }
+
+                    if (Math.random() > 0.01) {
+                        runAd();
                     }
                 } else {
                     // Don't want to allow you to guess a revealed letter
@@ -357,7 +370,7 @@
 
     <div 
         id="ad-break" 
-        onclick="this.style.display='none'"
+        onclick="this.style.display='none'; refreshAd();"
         class="column center"
     >
         <p>Advertisement, click to skip in 5... 4... 3... 2... 1... ok you can exit out now</p>
