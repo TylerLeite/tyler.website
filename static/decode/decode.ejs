@@ -31,7 +31,7 @@
             width: 100vw;
         }
 
-        #ad-break {
+        #com-break {
             position: fixed;
             width: 100vw;
             height: 100vh;
@@ -41,7 +41,7 @@
             display: none;
         }
 
-        #ad-break p {
+        #com-break p {
             width: 500px;
             margin: 5vh 0;
         }
@@ -262,10 +262,10 @@
 
         function refreshAd () {
             const r = Math.floor(Math.random()*75)+1;
-            document.getElementById('ad-img').src = `https://psychoca.de/decode/ads/${r}.jpg`
+            document.getElementById('com-img').src = `https://psychoca.de/decode/ads/${r}.jpg`
         }
         function runAd () {
-            document.getElementById('ad-break').style.display = 'flex';
+            document.getElementById('com-break').style.display = 'flex';
         }
 
         window.addEventListener('keydown', (event) => {
@@ -369,12 +369,12 @@
     </script>
 
     <div 
-        id="ad-break" 
+        id="com-break" 
         onclick="this.style.display='none'; refreshAd();"
         class="column center"
     >
         <p>Advertisement, click to skip in 5... 4... 3... 2... 1... ok you can exit out now</p>
-       <img id="ad-img" />
+       <img id="com-img" />
     </div>
 
     <select 
