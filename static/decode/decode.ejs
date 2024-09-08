@@ -223,7 +223,15 @@
 </head>
 
 <body 
-    onload="document.querySelector('#content .row.line .column .hidden').parentElement.className += ' highlighted'"
+    onload="
+        document.querySelector('#content .row.line .column .hidden').parentElement.className += ' highlighted';
+        let randomPercent = (Math.random()*50 + 55)
+        if (randomPercent > 100) {
+            randomPercent += Math.random()*69
+        }
+        randomPercent = Math.floor(randomPercent*100)/100;
+        alert(`Only ${randomPercent}% of the players solved this level at the first try!`);
+    "
     class="noselect"
 >
     <script>
@@ -243,7 +251,7 @@
                 checkVictory();
                 return;
             }
-            // todo: check if gameover
+
             const highlightedTile = document.querySelector('.highlighted');
             const highlightedLetter = highlightedTile.children[0];
             const encodedAs = parseInt(highlightedTile.children[1].innerText);
@@ -266,6 +274,7 @@
                     }
                 } else {
                     // Don't want to allow you to guess a revealed letter
+                    // TODO: don't let you guess a letter wrong if it's revealed somewhere else
                     const allRevealed = document.querySelectorAll('#tracker .char.revealed');
                     for (const r of allRevealed) {
                         if (r.innerHTML == letter) {
