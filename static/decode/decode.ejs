@@ -68,8 +68,28 @@
             padding: 3px 5px;
         }
 
-        #guesses {
+        #victory {
+            display: none;
             margin: 2.5vw 0;
+            border: 1px dotted #ff59ba; 
+            color: #ff59ba;
+        }
+
+        #guesses {
+            border: 1px dashed #4efc03;
+            margin: 2.5vw 0;
+            padding-bottom: 10px;
+            padding-top: 5px;
+        }
+
+        #guesses.one-wrong {
+            border-color: rgb(238, 223, 17);
+        }
+        #guesses.two-wrong {
+            border-color: rgb(238, 109, 17);
+        }
+        #guesses.three-wrong {
+            border-color: #e11;
         }
 
         #guesses .guess {
@@ -95,6 +115,8 @@
         #content .line {
             margin-bottom: 5px;
             justify-content: center;
+
+            flex-wrap: wrap;
         }
 
         #content .tile {
@@ -201,6 +223,7 @@
 >
     <script>
         window.addEventListener('keydown', (event) => {
+            if (event.repeat) { return }
             const letter = event.key.toUpperCase();
             if (letter.match(/[A-Z]/gm).length != 1) {
                 return;
@@ -223,7 +246,6 @@
                             break;
                         }
                     }
-                    console.log(revealedAll);
                     if (revealedAll) {
                         allOfThisLetter.map(e => e.nextElementSibling.innerText = ' ');
                     }
@@ -241,11 +263,25 @@
                         nextGuess.classList.toggle('x', true);
                     }
 
-                    didYouLose = document.querySelector('.guess.blank');
-                    if (didYouLose == null) {
-                        alert('u lose sry');
+                    const lives = document.querySelectorAll('.guess.blank').length;
+                    const gecl = document.getElementById('guesses').classList;
+                    if (lives == 2) {
+                        gecl.toggle('one-wrong', true);
+                    } else if (lives == 1) {
+                        gecl.toggle('one-wrong', false);
+                        gecl.toggle('two-wrong', true);
+                    } else if (lives == 0) {
+                        if (gecl.contains('three-wrong')) {
+                            const gel = document.getElementById('guesses');
+                            gel.append(gel.childNodes[0].cloneNode(true));
+                            gel.insertBefore(gel.children[0].cloneNode(true), gel.children[0]);
+                        } else {
+                            gecl.toggle('two-wrong', false);
+                            gecl.toggle('three-wrong', true);
+                            alert("YOU DON'T NEED TO GUESS!!!");
+                        }
                     }
-
+                    
                     return; // don't move cursor
                 }
             }
@@ -253,7 +289,8 @@
             // move cursor to the next letter
             let nextTile = highlightedTile.nextElementSibling;
 
-            while (nextTile === null || nextTile.classList.contains('ptile')) {
+            let sanity = 1000;
+            while ((nextTile === null || nextTile.classList.contains('ptile')) && sanity > 0) {
                 if (nextTile === null) {
                     nextLine = highlightedTile.parentElement.nextElementSibling;
                     if (nextLine === null) {
@@ -261,7 +298,8 @@
                         toHighlight = document.querySelector('#content .row.line .column .hidden');
                         if (toHighlight === null) {
                             // Game over!
-                            alert('looks like u win');
+                            document.getElementById('guess').style.display = 'none';
+                            document.getElementById('victory').style.display = 'flex';
                             return;
                         } else {
                             nextTile = toHighlight;
@@ -272,6 +310,7 @@
                 } else {
                     nextTile = nextTile.nextElementSibling;
                 }
+                sanity -= 1;
             }
             nextTile.click();
         });
@@ -295,6 +334,11 @@
     </select>
 
     <div class="game column">
+        <div id="victory" class="column center" onclick="window.location.reload()">
+            <p>You Won!! I love you :) You're so smart and hot.</p>
+            <p>If you wanna play again, just reload or click this text</p>
+        </div>
+
         <div id="guesses" class="row center">
             <div class="guess blank">X</div>
             <div class="guess blank">X</div>
@@ -306,32 +350,36 @@
             <div id="content">
                 <% for (let l=0; l < text.length; l++) { %>
                     <div class="row line">
-                        <% for (let c=0; c < text[l].length; c++) { %>
-                            <% if (text[l][c].match(/[A-Z]/)) { %>
-                                <span 
-                                    class="column tile" 
-                                    onclick="
-                                        document.querySelector('.highlighted').classList.toggle('highlighted', false);
-                                        this.classList.toggle('highlighted', true)
-                                    "
-                                >
-                                    <% if (encodedText[l][c] != -1) { %>
-                                        <div
-                                            class="letter encoded-as-<%= encodedText[l][c] %> hidden"
+                        <% for (let w=0; w < text[l].length; w++) { %>
+                            <span class="word row">
+                                <% for (let c=0; c < text[l][w].length; c++) { %>
+                                    <% if (text[l][w][c].match(/[A-Z]/)) { %>
+                                        <span 
+                                            class="column tile" 
+                                            onclick="
+                                                document.querySelector('.highlighted').classList.toggle('highlighted', false);
+                                                this.classList.toggle('highlighted', true)
+                                            "
                                         >
-                                            <%= text[l][c] %>
-                                        </div>
-                                        <div class="code-number center"><%= encodedText[l][c] %></div>
+                                            <% if (encodedText[l][w][c] != -1) { %>
+                                                <div
+                                                    class="letter encoded-as-<%= encodedText[l][w][c] %> hidden"
+                                                >
+                                                    <%= text[l][w][c] %>
+                                                </div>
+                                                <div class="code-number center"><%= encodedText[l][w][c] %></div>
+                                            <% } else { %>
+                                                <div class="letter revealed"><%= text[l][w][c] %></div>
+                                                <div class="code-number center"></div>
+                                            <% } %>
+                                        </span>
                                     <% } else { %>
-                                        <div class="letter revealed"><%= text[l][c] %></div>
-                                        <div class="code-number center"></div>
+                                        <span class="tile ptile">
+                                            <div class="punctuation"><%= text[l][w][c] %></div>
+                                        </span>
                                     <% } %>
-                                </span>
-                            <% } else { %>
-                                <span class="tile ptile">
-                                    <div class="punctuation"><%= text[l][c] %></div>
-                                </span>
-                            <% } %>
+                                <% } %>
+                            </span>
                         <% } %>
                     </div>
                 <% } %>

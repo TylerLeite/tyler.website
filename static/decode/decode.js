@@ -83,7 +83,8 @@ async function readCSV(name) {
 }
 
 async function getLyrics(artist, title) {
-    const artist_slugified = artist.split(' ').join('+');
+    const artistNoFeats = artist.toLowerCase().split('feat')[0];
+    const artist_slugified = artistNoFeats.split(' ').join('+');
     const title_slugified = title.split(' ').join('+');
     const url = `https://www.mldb.org/search?mq=${artist_slugified}+${title_slugified}&si=0&mm=0&ob=1`;
 
@@ -100,6 +101,7 @@ async function getLyrics(artist, title) {
         return null;
     }
 
+    console.log(html);
     const lyrics_raw = html.split('<p class="songtext" lang="EN">')[1].split('</p>')[0];
     const lyrics_stripped = lyrics_raw.replace(/\[.*\]/gm, '').replaceAll('\n', '');
     
@@ -360,7 +362,7 @@ function wordIsSolvable(pattern, word, dict) {
     }
 }
 
-async function main(text) {
+async function main(text, cutoff) {
     let minRevealed = Infinity;
     let minCoded = {};
 
@@ -381,7 +383,7 @@ async function main(text) {
         }
     }
 
-    if (minRevealed > 0.15) {
+    if (minRevealed > cutoff) {
         return null;
     }
     return minCoded;
@@ -420,7 +422,11 @@ async function getDataForPage(params) {
             content = songParts.chorus;
         }
 
-        coded = await main(content);
+        if (csvName == "poetry") {
+            coded = await main(content, 0.15);
+        } else {
+            coded = await main(content, 2); // no limit
+        }
     }
 
     // Want to modify the structure of coded.text and coded.encodedText
@@ -431,10 +437,21 @@ async function getDataForPage(params) {
     const structuredText = [];
     const structuredEncoded = [];
 
+    let currentWord = [];
     let currentLine = [];
+    let currentWordEnc = [];
     let currentLineEnc = [];
     for (let i = 0; i < coded.text.length; i++) {
-        if (coded.text[i] == '\n' || i == coded.text.length-1) {
+        if (!coded.text[i].match(/[A-Z\-'\n]/gm)) {
+            currentWord.push(coded.text[i]);
+            currentWordEnc.push(coded.encodedText[i]);
+
+            currentLine.push(currentWord);
+            currentLineEnc.push(currentWordEnc);
+
+            currentWord = [];
+            currentWordEnc = [];
+        } else if (coded.text[i] == '\n' || i == coded.text.length-1) {
             if (currentLine.length > 0) {
                 structuredText.push(currentLine);
                 structuredEncoded.push(currentLineEnc);
@@ -442,8 +459,8 @@ async function getDataForPage(params) {
             currentLine = [];
             currentLineEnc = [];
         } else {
-            currentLine.push(coded.text[i]);
-            currentLineEnc.push(coded.encodedText[i]);
+            currentWord.push(coded.text[i]);
+            currentWordEnc.push(coded.encodedText[i]);
         }
     }
 
