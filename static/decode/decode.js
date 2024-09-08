@@ -11,7 +11,7 @@ const modes = [
 
 async function getRandomPoem () {
     try {
-        const res = await fetch("https://poetrydb.org/random/20");
+        const res = await fetch("https://poetrydb.org/random/10");
         if (!res.ok) {
             throw new Error(`mldb might be down, could not reach ${url}`);
         }
@@ -101,7 +101,6 @@ async function getLyrics(artist, title) {
         return null;
     }
 
-    console.log(html);
     const lyrics_raw = html.split('<p class="songtext" lang="EN">')[1].split('</p>')[0];
     const lyrics_stripped = lyrics_raw.replace(/\[.*\]/gm, '').replaceAll('\n', '');
     
@@ -323,7 +322,8 @@ function phraseIsSolvable (revealedAndInferred, text, dict) {
 // input of form ("cou..n'.", "couldn't", {1: [...], 2: [...], ...})
 // Can make this smarter in several ways. from easier to harder:
 //  1. weed out candidates that include reavealed letters that aren't in this word
-//  2. correlate across other words that share the letter you're guessing
+//  2. use the fact that you know some letters must be the same
+//  3. correlate across other words that share the letter you're guessing
 function wordIsSolvable(pattern, word, dict) {
     const checkMe = function(_pattern) {
         // escape special characters in pattern e.g. '('
@@ -423,7 +423,7 @@ async function getDataForPage(params) {
         }
 
         if (csvName == "poetry") {
-            coded = await main(content, 0.15);
+            coded = await main(content, 0.2);
         } else {
             coded = await main(content, 2); // no limit
         }

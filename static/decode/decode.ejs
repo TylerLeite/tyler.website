@@ -113,7 +113,7 @@
         }
 
         #content .line {
-            margin-bottom: 5px;
+            margin-bottom: 20px;
             justify-content: center;
 
             flex-wrap: wrap;
@@ -222,10 +222,19 @@
     class="noselect"
 >
     <script>
+        function checkVictory () {
+            const stillHidden = document.querySelector('#content .row.line .column .hidden');
+            if (stillHidden === null) {
+                // Game over!
+                document.getElementById('guesses').style.display = 'none';
+                document.getElementById('victory').style.display = 'flex';
+            }
+        }
         window.addEventListener('keydown', (event) => {
             if (event.repeat) { return }
             const letter = event.key.toUpperCase();
             if (letter.match(/[A-Z]/gm).length != 1) {
+                checkVictory();
                 return;
             }
             // todo: check if gameover
@@ -282,6 +291,7 @@
                         }
                     }
                     
+                    checkVictory();
                     return; // don't move cursor
                 }
             }
@@ -297,9 +307,7 @@
                         // Loop back to the beginning
                         toHighlight = document.querySelector('#content .row.line .column .hidden');
                         if (toHighlight === null) {
-                            // Game over!
-                            document.getElementById('guess').style.display = 'none';
-                            document.getElementById('victory').style.display = 'flex';
+                            checkVictory();
                             return;
                         } else {
                             nextTile = toHighlight;
@@ -313,6 +321,7 @@
                 sanity -= 1;
             }
             nextTile.click();
+            checkVictory();
         });
     </script>
     <select 
