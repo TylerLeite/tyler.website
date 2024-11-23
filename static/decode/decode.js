@@ -13,7 +13,7 @@ async function getRandomPoem () {
     try {
         const res = await fetch("https://poetrydb.org/random/10");
         if (!res.ok) {
-            throw new Error(`mldb might be down, could not reach ${url}`);
+            throw new Error(`poetrydb.org might be down, could not reach ${url}`);
         }
 
         const poems = await res.json();
@@ -35,7 +35,7 @@ async function getRandomPoem () {
 
 }
 
-async function getDict() {
+async function getDict () {
     const filen = `https://psychoca.de/decode/12dicts_2of12.txt`;
     try {
         const res = await fetch(filen);
@@ -50,7 +50,7 @@ async function getDict() {
     }
 }
 
-function processDict(wordList) {
+function processDict (wordList) {
     const byLength = {};
     for (let word of wordList) {
         const l = word.length;
@@ -64,7 +64,7 @@ function processDict(wordList) {
     return byLength;
 }
 
-async function readCSV(name) {
+async function readCSV (name) {
     const filen = `https://psychoca.de/decode/songbanks/${name}.csv`;
     try {
         const res = await fetch(filen);
@@ -82,17 +82,20 @@ async function readCSV(name) {
     }
 }
 
-async function getLyrics(artist, title) {
+async function getLyrics (artist, title) {
+    function slugify (str) {
+        return str.split('').filter(e => e.match(/[A-Za-z0-9]/)).join('').toLowerCase()
+    }
     const artistNoFeats = artist.toLowerCase().split('feat')[0];
-    const artist_slugified = artistNoFeats.split(' ').join('+');
-    const title_slugified = title.split(' ').join('+');
-    const url = `https://www.mldb.org/search?mq=${artist_slugified}+${title_slugified}&si=0&mm=0&ob=1`;
+    const artistSlugified = slugify(artistNoFeats);
+    const titleSlugified = slugify(title);
+    const url = `https://www.azlyrics.com/lyrics/${artistSlugified}/${titleSlugified}.html`;
 
     let html = "";
     try {
         const res = await fetch(url);
         if (!res.ok) {
-            throw new Error(`mldb might be down, could not reach ${url}`);
+            throw new Error(`azlyrics might be down, could not reach ${url}`);
         }
 
         html = await res.text();
@@ -101,15 +104,18 @@ async function getLyrics(artist, title) {
         return null;
     }
 
-    const lyrics_raw = html.split('<p class="songtext" lang="EN">')[1].split('</p>')[0];
-    const lyrics_stripped = lyrics_raw.replace(/\[.*\]/gm, '').replaceAll('\n', '');
-    
-    const stanzas = lyrics_stripped.toUpperCase().split(/(<BR \/>){2,3}/gm).map(e => e.replaceAll('<BR />', '\n')).filter(e => e != '\n');
-
+    const lyricsRaw = html.split('<!-- MxM banner -->')[0].split('our licensing agreement. Sorry about that. -->')[1].split('</div>')[0];
+    const lyricsStripped = lyricsRaw.replaceAll('\r', '').split('\n')
+                                    .filter(e => !e.startsWith('<i>'))
+                                    .map(e => e.match(/.+<br>/g) === null ? e : e.replaceAll('<br>', ''))
+                                    .map(e => e.replaceAll('\n', ''))
+                                    .join('\n');
+    const stanzas = lyricsStripped.trimStart().split('<br>').map(e => e.trimStart().toUpperCase());
+   
     return stanzas;
 }
 
-function analyzeLyrics(stanzas) {
+function analyzeLyrics (stanzas) {
     // Find the chorus
     const uniq_stanzas = stanzas.filter((e, i) => stanzas.indexOf(e) == i);
     const stanza_ct = {};
@@ -161,14 +167,14 @@ function analyzeLyrics(stanzas) {
     return songParts;
 }
 
-function shuffle(array) {
+function shuffle (array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
 
-function encrypt (text) {
+function encode (text) {
     const alphabet = 'QWERTYUIOPASDFGHJKLZXCVBNM'.split('');
     shuffle(alphabet);
     const encoding = {};
@@ -176,7 +182,7 @@ function encrypt (text) {
         encoding[alphabet[i]] = i;
     }
 
-    const encode = function(char) {
+    const _encode = function(char) {
         if (typeof encoding[char] === 'undefined') {
             return char;
         } else {
@@ -192,7 +198,7 @@ function encrypt (text) {
         }
     }
     
-    const encodedText = text.split('').map(encode);
+    const encodedText = text.split('').map(_encode);
     return {
         encoding,
         encodingArr: alphabet,
@@ -269,6 +275,8 @@ function phraseIsSolvable (revealedAndInferred, text, dict) {
             _wordText += text[i];
         }
     }
+
+    // console.log(wordsText);
 
     const letterTally = {};
     const wordsByLetter = {};
@@ -362,15 +370,12 @@ function wordIsSolvable(pattern, word, dict) {
     }
 }
 
-async function main(text, cutoff) {
+async function main (text, cutoff, dict) {
     let minRevealed = Infinity;
     let minCoded = {};
 
-    const allWordsTxt = await getDict();
-    const dict = processDict(allWordsTxt);
-
     for (let i = 0; i < 10; i++) {
-        const coded = encrypt(text);
+        const coded = encode(text);
     
         let revealed = [];
         runRevealProcedure(revealed, [], coded.text, dict);
@@ -389,7 +394,7 @@ async function main(text, cutoff) {
     return minCoded;
 }
 
-function revealLetters(coded) {
+function revealLetters (coded) {
     let nRevealed = 0;
     const text = coded.text.split('');
     for (let i = 0; i < text.length; i++) {
@@ -402,11 +407,14 @@ function revealLetters(coded) {
     return nRevealed/text.length;
 }
 
-async function getDataForPage(params) {
+async function getDataForPage (params) {
     let csvName = "poetry";
     if (JSON.stringify(params) !== "{}") {
         csvName = params.mode;
     }
+
+    const allWordsTxt = await getDict();
+    const dict = processDict(allWordsTxt);
 
     let coded = null;
 
@@ -418,6 +426,8 @@ async function getDataForPage(params) {
         } else {
             const csvData = await readCSV(csvName);
             shuffle(csvData);
+            // Loop this until getLyrics doesn't throw an error
+            // AND content's entropy is low enough
             const row = csvData.pop();
             const stanzas = await getLyrics(row[2], row[1]);
             const songParts = analyzeLyrics(stanzas);
@@ -425,10 +435,10 @@ async function getDataForPage(params) {
         }
 
         if (csvName == "poetry") {
-            coded = await main(content, threshold);
+            coded = await main(content, threshold, dict);
             threshold += 0.01;
         } else {
-            coded = await main(content, 2); // no limit
+            coded = await main(content, 2, dict); // no limit
         }
     }
 

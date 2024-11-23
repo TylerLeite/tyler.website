@@ -1,0 +1,52 @@
+* {
+  font-family: Montserrat;
+  margin: 0;
+
+  background-color: #333;
+  color: #11ee22;
+}
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 75vw;
+  margin: 0 auto;
+}
+
+#-state-text {
+  display: none;
+}
+
+#state-text {
+  width: 100%;
+  font-size: 24px;
+  white-space: pre-wrap;
+  line-height: 2;
+  margin-top: 5vh;
+}
+
+.invisible {
+  display: none;
+}
+
+.options {
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: 85vw;
+}
+
+.option {
+  border-radius: 5px;
+  border: 2px solid #11ee22;;
+  margin-top: 35px;
+  padding: 15px;
+
+  font-size: 18px;
+}
+
+.option:hover {
+  background-color: #11ee22;
+  cursor: pointer;
+}

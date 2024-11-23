@@ -13,6 +13,44 @@
 
     <title>You don't need to guess</title>
     <style>
+        :root {
+            --bg-color: rgb(255, 224, 220);
+            --bg-color-transparent:  rgba(255, 224, 220, 0.8);
+            --bg-color-hover: rgb(213, 213, 213);
+            --popup-bg-color: rgba(0,0,0,0.8);
+
+            --text-color: rgb(255, 42, 191);
+            --text-color-dark: rgb(255, 0, 195);
+
+            --highlight-color: rgb(255, 0, 191);
+
+            --victory-color: rgb(255, 89, 186);
+
+            --warning-0: rgb(238, 17, 17);
+            --warning-1: rgb(209, 67, 16);
+            --warning-2: rgb(238, 109, 17);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: rgb(51, 51, 51);
+                --bg-color-transparent:  rgba(51, 51, 51, 0.8);
+                --bg-color-hover: rgb(226, 226, 226);
+                --popup-bg-color: rgba(0,0,0,0.8);
+
+                --text-color: rgb(78, 252, 3);
+                --text-color-dark: rgb(0, 128, 0);
+
+                --highlight-color: rgb(153, 153, 153);
+
+                --victory-color: rgb(255, 89, 186);
+
+                --warning-0: rgb(238, 17, 17);
+                --warning-1: rgb(238, 109, 17);
+                --warning-2: rgb(238, 223, 17);
+            }
+        }
+
         * {
             font-family: 'Noto Sans Mono', sans-serif;
             font-weight: 400;
@@ -21,8 +59,8 @@
         }
 
         body {
-            background-color: #333;
-            color: #4efc03;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             display: flex;
             flex-flow: column nowrap;
@@ -35,7 +73,7 @@
             position: fixed;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.8);
+            background: var(--popup-bg-color);
             z-index: 2;
             justify-content: flex-start;
             display: none;
@@ -76,35 +114,48 @@
             display: none;
             
             margin-top: 2.5vh;
-            border: 1px solid #4efc03;
+            border: 1px solid var(--text-color);
             border-radius: 2px;
-            background-color: #333;
-            color: #4efc03;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             padding: 3px 5px;
         }
 
-        #victory {
-            display: none;
-            margin: 2.5vw 0;
-            border: 1px dotted #ff59ba; 
-            color: #ff59ba;
-        }
+        #message-spacer {
+            position: relative;
+            height: 45.5px;
 
-        #guesses {
-            border: 1px dashed #4efc03;
             margin: 2.5vw 0;
             padding-bottom: 10px;
             padding-top: 5px;
         }
 
+        #victory {
+            display: none;
+            margin: 2.5vw 0;
+            border: 1px dotted var(--victory-color); 
+            color: var(--victory-color);
+
+            background: var(--bg-color-transparent);
+        }
+
+        #guesses {
+            border: 1px dashed var(--text-color);
+            margin: 2.5vw 0;
+            padding-bottom: 10px;
+            padding-top: 5px;
+
+            background: var(--bg-color-transparent);
+        }
+
         #guesses.one-wrong {
-            border-color: rgb(238, 223, 17);
+            border-color: var(--warning-2);
         }
         #guesses.two-wrong {
-            border-color: rgb(238, 109, 17);
+            border-color: var(--warning-1);
         }
         #guesses.three-wrong {
-            border-color: #e11;
+            border-color: var(--warning-0);
         }
 
         #guesses .guess {
@@ -114,13 +165,13 @@
         }
 
         #guesses .guess.blank {
-            color: #333;
-            border-bottom: 1px solid #4efc03;
+            color: var(--bg-color);
+            border-bottom: 1px solid var(--text-color);
         }
 
         #guesses .guess.x {
-            color: #ee1111;
-            border-bottom: 1px solid #e11;
+            color: var(--warning-0);
+            border-bottom: 1px solid var(--warning-0);
         }
 
         #content .revealed {
@@ -138,27 +189,27 @@
         }
 
         #content .tile {
-            border: 1px solid #333;
+            border: 1px solid var(--bg-color);
         }
 
         #content .tile.highlighted, #content .tile:hover:not(.ptile) {
-            border: 1px solid #999;
+            border: 1px solid var(--highlight-color);
         }
 
         #content .letter {
             font-size: 16px;
-            border-bottom: 1px solid #4efc03;
+            border-bottom: 1px solid var(--text-color);
             margin: 0px 4px;
             padding: 0px 3px;
         }
 
         #content .letter.hidden {
-            color: #333;
+            color: var(--bg-color);
         }
 
         #content .code-number {
             font-size: 13px;
-            color: green;
+            color: var(--text-color-dark);
         }
 
         #content .punctuation {
@@ -196,12 +247,12 @@
         }
 
         #tracker .char {
-            border-bottom: 1px solid #4efc03;
+            border-bottom: 1px solid var(--text-color);
             padding: 0 3px;
         }
 
         #tracker .char.hidden {
-            color: #333;
+            color: var(--bg-color);
         }
 
         .new-game {
@@ -209,14 +260,14 @@
 
             margin-top: 2.5vh;
             font-size: 16px;
-            border: 1px solid #4efc03;
+            border: 1px solid var(--text-color);
             border-radius: 5px;
             padding: 15px;
             cursor: pointer;
         }
 
         .new-game:hover {
-            background-color: #444;
+            background-color: var(--bg-color-hover);
         }
 
         #hidden-input {
@@ -229,13 +280,13 @@
             outline: none;
             padding: 0;
             margin: 0;
-            background-color: #333;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--bg-color);
         }
 
         @media (max-width: 600px) {
             #content .tile:hover:not(.ptile):not(.highlighted) {
-                border: 1px solid #333;
+                border: 1px solid var(--bg-color);
             }
 
             #content .letter { font-size: 24px; }
@@ -320,6 +371,7 @@
                             return;
                         }
                     }
+
                     let nextGuess = document.querySelector('.guess.blank');
                     if (nextGuess !== null) {
                         nextGuess.classList.toggle('blank', false);
@@ -407,15 +459,17 @@
     </select>
 
     <div class="game column">
-        <div id="victory" class="column center" onclick="window.location.reload()">
-            <p>You Won!! I love you :) You're so smart and hot.</p>
-            <p>If you wanna play again, just reload or click this text</p>
-        </div>
+        <div id="message-spacer">
+            <div id="victory" class="column center" onclick="window.location.reload()">
+                <p>You Won!! I love you :) You're so smart and hot.</p>
+                <p>If you wanna play again, just reload or click this text</p>
+            </div>
 
-        <div id="guesses" class="row center">
-            <div class="guess blank">X</div>
-            <div class="guess blank">X</div>
-            <div class="guess blank">X</div>
+            <div id="guesses" class="row center">
+                <div class="guess blank">X</div>
+                <div class="guess blank">X</div>
+                <div class="guess blank">X</div>
+            </div>
         </div>
 
         <div class="row">

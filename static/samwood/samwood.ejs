@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta lang="en-us">
+    <meta name="viewport" content="width=device-width">
+
+    <title>The Life and Times of Sam Wood</title>
+
+    <link rel="icon" type="image/png" href="/samwood/graphics/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/samwood/css/style.css">
+
+    <script>
+        function goTo (state) {
+            window.location = `samwood?state=${state}`
+        }
+
+        function slowReveal(letterInterval, optionInterval) {
+            writeText(0, letterInterval, optionInterval)
+        }
+
+        function writeText (index, interval, optionInterval) {
+            const text = document.getElementById('-state-text').innerText;
+            document.getElementById('state-text').innerText += text[index];
+            
+            if (index < text.length-1) {
+                setTimeout(writeText.bind(null, index+1, interval, optionInterval), interval);
+            } else {
+                setTimeout(revealOptions.bind(null, 0, optionInterval), optionInterval);
+            }
+        }
+
+        function revealOptions (index, interval) {
+            const nOptions = document.querySelectorAll('.options > .option').length;
+
+            if (index < nOptions) {
+                const currentOption = document.querySelector(`.options > #id${index}`);
+                currentOption.classList.toggle('invisible', false);
+                setTimeout(revealOptions.bind(null, index+1, interval), interval);
+            }
+        }
+
+        function bodyOnLoad () {
+            slowReveal(10, 300);
+        }
+    </script>
+</head>
+
+<body onload="bodyOnLoad();">
+    <div id="-state-text">
+        <%= state.text %>
+    </div>
+    <p id="state-text"></p>
+    <div class="options">
+        <% for (let i=0; i < state.options.length; i++) { %>
+            <span class="option invisible" id="id<%= i %>"
+                onclick="goTo('<%= state.options[i].nextState %>')"
+            >
+                <%= state.options[i].text %>
+            </span>
+        <% } %>
+    </div>
+</body>
+
+</html>
