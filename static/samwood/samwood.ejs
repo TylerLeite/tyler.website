@@ -25,7 +25,12 @@
 
         function writeText (index, interval, optionInterval) {
             const text = document.getElementById('-state-text').innerText;
-            document.getElementById('state-text').innerText += text[index];
+
+            if (text[index] === '\n') {
+                document.getElementById('state-text').innerHTML += '<br/>';
+            } else {
+                document.getElementById('state-text').innerHTML += text[index];
+            }
             
             if (index < text.length-1) {
                 setTimeout(writeText.bind(null, index+1, interval, optionInterval), interval);

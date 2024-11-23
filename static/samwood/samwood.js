@@ -6,7 +6,7 @@ const states = {
             nextState: "train",
         }]
     }, train: {
-        text: "With his right hand once more on his side-arm, Sam pushed into the poorly lighted room and then drew a quick gulp of breath. There was someone there.",
+        text: "\"With his right hand once more on his side-arm, Sam pushed into the poorly lighted room and then drew a quick gulp of breath. There was someone there.\" (p. 12)",
         pages: [12],
         options: [{
             text: "That's the killer! Shoot him while you still have the chance.",
@@ -33,14 +33,14 @@ const states = {
             nextState: "train",
         }]
     }, a: {
-        text: "'Go out the door to your left', he ordered, 'There's a police car in drive. Get in the back seat and shut the door. Make one false move and I'll drop you right then with a bullet in your spine. Now move.'",
+        text: "\"'Go out the door to your left', he ordered, 'There's a police car in drive. Get in the back seat and shut the door. Make one false move and I'll drop you right then with a bullet in your spine. Now move.'\" (p. 14)",
         pages: [14],
         options: [{
             text: "Continue",
             nextState: "police",
         }]
     }, police: {
-        text: "\"Is [Virgil] here?\"\n\"No, he's been out all day. Took that old car he's got and left. No one knows where he is.\"\n\"Maybe he got lonesome and found some nice black girl to shack up with him.\" As soon as he had uttered those words, Sam was ashamed of himself. He wished he hadn't said them.",
+        text: "\"'Is [Virgil] here?'\n'No, he's been out all day. Took that old car he's got and left. No one knows where he is.'\n'Maybe he got lonesome and found some nice black girl to shack up with him.' As soon as he had uttered those words, Sam was ashamed of himself. He wished he hadn't said them.\" (p. 69)",
         pages: [69],
         options: [{
             text: "Play it off as a joke and try to bolster Virgil's reputation.",
@@ -53,14 +53,14 @@ const states = {
             nextState: "f2c",
         }]
     }, b: {
-        text: "Sam made amends, and was glad he could. \"I was just kiddin'. Virgil's all right. It wouldn't fool me if he came out on top of this thing.\"",
+        text: "\"Sam made amends, and was glad he could. 'I was just kiddin'. Virgil's all right. It wouldn't fool me if he came out on top of this thing.'\" (p. 70)",
         pages: [70],
         options: [{
             text: "Continue",
             nextState: "diner",
         }]
     }, f2b: {
-        text: "\"I don't know\", Pete answered slowly, \"He's awful smart for a black boy. I bet he's working on the case somehow.\"",
+        text: "\"'I don't know', Pete answered slowly, 'He's awful smart for a black boy. I bet he's working on the case somehow.'\" (p. 70)",
         pages: [],
         options: [{
             text: "Try again.",
@@ -74,7 +74,7 @@ const states = {
             nextState: "police",
         }]
     }, diner: {
-        text: "As he picked up speed, he wondered what to do with Virgil while he was at the diner; colored were not allowed inside. No clear answer had come to him by the time he pulled into the parking lot.",
+        text: "\"As he picked up speed, he wondered what to do with Virgil while he was at the diner; colored were not allowed inside. No clear answer had come to him by the time he pulled into the parking lot.\" (p. 82)",
         pages: [82],
         options: [{
             text: "Stop in for a few minutes and have a Coke and some pie.",
@@ -111,7 +111,7 @@ const states = {
             nextState: "diner",
         }]
     }, c: {
-        text: "Ralph's displeasure didn't phase Sam a bit; it even helped to mollify his conscience. As he passed the food to Virgil Tibbs he felt proud of himself.",
+        text: "\"Ralph's displeasure didn't phase Sam a bit; it even helped to mollify his conscience. As he passed the food to Virgil Tibbs he felt proud of himself.\" (p. 83)",
         pages: [83],
         options: [{
             text: "Continue",
