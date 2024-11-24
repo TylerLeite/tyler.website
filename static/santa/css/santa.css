@@ -6,8 +6,13 @@
 .message {
   text-align: center;
   margin-top: 10%;
-  margin-bottom: 5%;
   font-size: 32px;
+}
+
+.sub-message {
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 5%;
 }
 
 .buttons {
