@@ -168,7 +168,7 @@ const states = {
     e1: {
         text: "You walk into the Cookie Palace! It is beautiful and grand as always. The specials on the menu are PB&J cookies, chamomile lemondrop cookies, and peppermint espresso cookies. The nutcracker at the door seems to be waving at you, and the man at the counter is asking for the next person in line to come place their order.",
         options: [{
-            text: "Go up to the counter and talk to the depressed-looking cahier.",
+            text: "Go up to the counter and talk to the depressed-looking cashier.",
             nextState: "e12",
         }, {
             text: "Talk to the nutcracker and see what he wants.",
@@ -283,11 +283,8 @@ const states = {
             text: "Can I get uhhhhhhhhhhhhhhhh peppermint espresso?",
             nextState: "e16",
         }, {
-            text: "One of everything good sir!",
-            nextState: "e17",
-        }, {
             text: "Have you seen my dog? I'm pretty sure she came in here earlier today.",
-            nextState: "e15",
+            nextState: "e17",
         }]
     },
     e13: {
@@ -392,6 +389,36 @@ const states = {
         options: [{
             text: "Ok you could have just said she went to Bed Bath and Beyond but whatever.",
             nextState: "f1",
+        }]
+    },
+    e17: {
+        text: "\"Oh so you wanna find your cute little Pepperoni dog huh?\" The guy gives you the first smile you have seen on his face in all your years getting cookies here. \"Well, maybe she came in and maybe she didn't. Can't recall, exactly. Maybe if you bought some cookies, it would jog my memory.\"",
+        options: [{
+            text: "I'll take a PB&J cookie, please.",
+            nextState: "e14",
+        }, {
+            text: "How about the lemondrop one?",
+            nextState: "e15",
+        }, {
+            text: "Can I get uhhhhhhhhhhhhhhhh peppermint espresso?",
+            nextState: "e16",
+        }, {
+            text: "This guy is trying to extort you! Give him a smack upside the head so he knows you mean business.",
+            nextState: "e18"
+        }]
+    },
+    e17: {
+        text: "\"I'll teach you to keep my Pep from me!\" And then you smack him right in the face. He starts crying and calls over security (the nutcracker). You don't wanna get your nuts cracked so you figure you better skee-daddle. Maybe the dumpster has a clue?",
+        options: [{
+            text: "Guess it's time to go dumpster diving...",
+            nextState: "e18",
+        }]
+    },
+    e17: {
+        text: "You head out to the dumpster and start digging. It's actually kinda fun. Tyler thinks it's weird how much fun you're having. He goes back inide to try and reconcile with the nutcracker.",
+        options: [{
+            text: "YEAH DUMPSTER DIVING! DIG DIG DIG!",
+            nextState: "e8",
         }]
     },
     f0: {
