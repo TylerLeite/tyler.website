@@ -2,8 +2,8 @@
   font-family: Montserrat;
   margin: 0;
 
-  background-color: #333;
-  color: #11ee22;
+  background-color: #0a6431;
+  color: #F8B229;
 }
 
 body {
@@ -39,7 +39,7 @@ body {
 
 .option {
   border-radius: 5px;
-  border: 2px solid #11ee22;;
+  border: 2px solid #F8B229;
   margin-top: 35px;
   padding: 15px;
 
@@ -47,6 +47,7 @@ body {
 }
 
 .option:hover {
-  background-color: #11ee22;
+  /* background-color: #cc1717; */
+  background-color: #113b23;
   cursor: pointer;
 }
