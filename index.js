@@ -22,6 +22,7 @@ if (!process.env.DEV) {
   app.use(forceHTTPS());
 } else {
   console.log("Dev environment, not forcing https")
+  app.subdomainOffset = 1;
 }
 
 const router = new KoaRouter();
@@ -30,6 +31,31 @@ router.get('*', async (ctx, next) => {
   let url = ctx.request.url.split('?')[0];
 
   const urlparts = _.filter(url.split('/'), el => !!el);
+
+  try {
+    console.log("subdomains", ctx.request.subdomains);
+    const subdomain = ctx.subdomains[0];
+    if (subdomain == 'satview') {
+      if (urlparts.length == 0) {
+        urlparts.push('index.html');
+      }
+
+      let fileType, fileContents;
+      for (let i = 0; i < urlparts.length; i++) {
+        let test = './sub-apps/satview/' + urlparts.slice(0, urlparts.length - i).join('/');
+        console.log(test);
+        if (fs.existsSync(test)) {
+          [fileType, fileContents] = await getFile(test, ctx.query);
+          break;
+        }
+      }
+      
+      ctx.type = fileType;
+      ctx.body = fileContents;
+
+      return;
+    }
+  } catch (e) {}
 
   if (urlparts.length == 0) {
     urlparts.push('home');
